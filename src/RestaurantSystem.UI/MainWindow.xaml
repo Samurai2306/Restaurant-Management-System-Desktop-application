@@ -1,0 +1,142 @@
+<mahapps:MetroWindow x:Class="RestaurantSystem.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:RestaurantSystem.UI"
+        xmlns:viewModels="clr-namespace:RestaurantSystem.UI.ViewModels"
+      mc:Ignorable="d"
+        Title="{Binding Title}"
+        Height="720" Width="1280"
+        WindowStartupLocation="CenterScreen"
+        GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
+        d:DataContext="{d:DesignInstance Type=viewModels:MainWindowViewModel}">
+
+    <mahapps:MetroWindow.LeftWindowCommands>
+      <mahapps:WindowCommands>
+    <Button Content="??" />
+        </mahapps:WindowCommands>
+    </mahapps:MetroWindow.LeftWindowCommands>
+
+ <mahapps:MetroWindow.RightWindowCommands>
+        <mahapps:WindowCommands>
+            <Button Content="??" />
+     </mahapps:WindowCommands>
+    </mahapps:MetroWindow.RightWindowCommands>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+   <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+        <!-- App Bar -->
+        <materialDesign:ColorZone Mode="PrimaryMid" 
+         Padding="16"
+   materialDesign:ShadowAssist.ShadowDepth="Depth2"
+  Grid.Row="0">
+  <DockPanel>
+        <StackPanel Orientation="Horizontal"
+     DockPanel.Dock="Left">
+   <Button Style="{StaticResource MaterialDesignIconButton}"
+     Margin="0 0 8 0">
+      <materialDesign:PackIcon Kind="Menu"/>
+   </Button>
+    <TextBlock Text="{Binding Title}"
+           VerticalAlignment="Center"
+ Style="{StaticResource H2}"
+                Foreground="{StaticResource TextLightBrush}"/>
+       </StackPanel>
+          <StackPanel Orientation="Horizontal"
+        DockPanel.Dock="Right"
+         HorizontalAlignment="Right">
+           <Button Style="{StaticResource MaterialDesignIconButton}"
+ Margin="8 0">
+               <materialDesign:PackIcon Kind="BellOutline"/>
+     </Button>
+       <Button Style="{StaticResource MaterialDesignIconButton}"
+      Margin="8 0">
+    <materialDesign:PackIcon Kind="AccountCircleOutline"/>
+            </Button>
+         </StackPanel>
+  </DockPanel>
+        </materialDesign:ColorZone>
+
+      <!-- Main Content -->
+        <Grid Grid.Row="1">
+         <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+         </Grid.ColumnDefinitions>
+
+   <!-- Navigation Menu -->
+ <materialDesign:Card Grid.Column="0" 
+     Margin="16"
+      UniformCornerRadius="8"
+              Background="{StaticResource SurfaceLightBrush}"
+    materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                <ListBox Style="{StaticResource DefaultListBox}"
+    Width="200">
+      <ListBoxItem>
+<StackPanel Orientation="Horizontal">
+            <materialDesign:PackIcon Kind="ViewDashboard" Margin="0 0 8 0"/>
+       <TextBlock Text="Dashboard"/>
+            </StackPanel>
+            </ListBoxItem>
+          <ListBoxItem>
+<StackPanel Orientation="Horizontal">
+         <materialDesign:PackIcon Kind="Table" Margin="0 0 8 0"/>
+       <TextBlock Text="Tables"/>
+    </StackPanel>
+        </ListBoxItem>
+               <ListBoxItem>
+    <StackPanel Orientation="Horizontal">
+          <materialDesign:PackIcon Kind="CalendarClock" Margin="0 0 8 0"/>
+     <TextBlock Text="Reservations"/>
+       </StackPanel>
+       </ListBoxItem>
+   <ListBoxItem>
+        <StackPanel Orientation="Horizontal">
+             <materialDesign:PackIcon Kind="FoodForkDrink" Margin="0 0 8 0"/>
+              <TextBlock Text="Orders"/>
+         </StackPanel>
+         </ListBoxItem>
+     <ListBoxItem>
+            <StackPanel Orientation="Horizontal">
+         <materialDesign:PackIcon Kind="RestaurantMenu" Margin="0 0 8 0"/>
+      <TextBlock Text="Menu"/>
+      </StackPanel>
+      </ListBoxItem>
+         </ListBox>
+    </materialDesign:Card>
+
+            <!-- Content Area -->
+<materialDesign:Card Grid.Column="1"
+   Margin="0 16 16 16"
+        UniformCornerRadius="8"
+           Background="{StaticResource SurfaceLightBrush}"
+       materialDesign:ShadowAssist.ShadowDepth="Depth1">
+         <ContentControl Content="{Binding CurrentView}"/>
+ </materialDesign:Card>
+        </Grid>
+
+   <!-- Status Bar -->
+   <materialDesign:ColorZone Mode="Standard" 
+ Grid.Row="2"
+         Height="24">
+        <DockPanel Margin="8 0">
+    <TextBlock Text="Ready"
+     DockPanel.Dock="Left"
+        VerticalAlignment="Center"/>
+        <TextBlock Text="{Binding Source={x:Static local:App.Version}, StringFormat=Version: {0}}"
+     DockPanel.Dock="Right"
+             HorizontalAlignment="Right"
+  VerticalAlignment="Center"/>
+            </DockPanel>
+   </materialDesign:ColorZone>
+    </Grid>
+
+</mahapps:MetroWindow>
