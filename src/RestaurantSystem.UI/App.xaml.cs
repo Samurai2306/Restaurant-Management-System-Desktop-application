@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -34,41 +35,60 @@ public partial class App : Application
 
     private void ConfigureServices(IServiceCollection services, IConfiguration configuration)
     {
-      // Register database
-    services.AddDataServices(configuration.GetConnectionString("DefaultConnection"));
+        // Register database
+        services.AddDataServices(configuration.GetConnectionString("DefaultConnection") ?? "Data Source=restaurant.db");
 
-     // Register ViewModels
-    services.AddSingleton<MainWindowViewModel>();
-    services.AddTransient<TablesViewModel>();
-     services.AddTransient<ReservationsViewModel>();
-     services.AddTransient<MenuViewModel>();
-    services.AddTransient<OrdersViewModel>();
-
-        // Register Views
+        // Register UI Services
+        services.AddSingleton<Services.IDialogService, Services.DialogService>();
+        services.AddSingleton<Services.INavigationService, Services.NavigationService>();
+        
+        // Register MainWindow
         services.AddSingleton<MainWindow>();
-
-        // Register other services
-        RegisterServices(services);
+        
+        // Register ViewModels
+        services.AddSingleton<MainWindowViewModel>();
+        services.AddTransient<TablesViewModel>();
+        services.AddTransient<ViewModels.Tables.TableViewModel>();
+        services.AddTransient<ReservationsViewModel>();
+        services.AddTransient<ViewModels.Reservations.ReservationViewModel>();
+        services.AddTransient<MenuViewModel>();
+        services.AddTransient<ViewModels.Menu.DishViewModel>();
+        services.AddTransient<OrdersViewModel>();
+        services.AddTransient<ViewModels.Orders.OrderViewModel>();
+        services.AddTransient<ViewModels.Orders.OrderItemViewModel>();
     }
 
-    private void RegisterServices(IServiceCollection services)
-    {
-    // Add services here
- }
-
     protected override async void OnStartup(StartupEventArgs e)
-  {
-        await _host.StartAsync();
-
-        // Initialize database
-        await _host.Services.InitializeDatabaseAsync();
-
-        // Get the main window from DI and show it
-        var mainWindow = _host.Services.GetRequiredService<MainWindow>();
-        mainWindow.Show();
-
+    {
         base.OnStartup(e);
- }
+
+        try
+        {
+            await _host.StartAsync();
+
+            // Initialize database
+            await _host.Services.InitializeDatabaseAsync();
+
+            // Get the main window and ViewModel from DI
+            var mainWindow = _host.Services.GetRequiredService<MainWindow>();
+            var mainWindowViewModel = _host.Services.GetRequiredService<MainWindowViewModel>();
+            
+            // Set DataContext
+            mainWindow.DataContext = mainWindowViewModel;
+            
+            // Navigate to Tables view by default
+            mainWindowViewModel.NavigateTablesCommand.Execute(null);
+            
+            // Show the main window
+            mainWindow.Show();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error starting application: {ex.Message}\n\n{ex.StackTrace}", 
+                "Startup Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            Shutdown();
+        }
+    }
 
     protected override async void OnExit(ExitEventArgs e)
     {

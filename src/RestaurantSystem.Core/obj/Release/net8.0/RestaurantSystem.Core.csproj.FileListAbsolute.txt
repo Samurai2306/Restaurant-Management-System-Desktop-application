@@ -1,0 +1,13 @@
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.Core\bin\Release\net8.0\RestaurantSystem.Core.deps.json
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.Core\bin\Release\net8.0\RestaurantSystem.Core.dll
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.Core\bin\Release\net8.0\RestaurantSystem.Core.pdb
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.Core\obj\Release\net8.0\RestaurantSystem.Core.csproj.AssemblyReference.cache
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.Core\obj\Release\net8.0\RestaurantSystem.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.Core\obj\Release\net8.0\RestaurantSystem.Core.AssemblyInfoInputs.cache
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.Core\obj\Release\net8.0\RestaurantSystem.Core.AssemblyInfo.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.Core\obj\Release\net8.0\RestaurantSystem.Core.csproj.CoreCompileInputs.cache
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.Core\obj\Release\net8.0\RestaurantSystem.Core.sourcelink.json
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.Core\obj\Release\net8.0\RestaurantSystem.Core.dll
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.Core\obj\Release\net8.0\refint\RestaurantSystem.Core.dll
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.Core\obj\Release\net8.0\RestaurantSystem.Core.pdb
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.Core\obj\Release\net8.0\ref\RestaurantSystem.Core.dll

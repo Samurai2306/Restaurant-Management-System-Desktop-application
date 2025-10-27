@@ -187,3 +187,14 @@ C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application
 C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\bin\Debug\net8.0-windows\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\bin\Debug\net8.0-windows\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\bin\Debug\net8.0-windows\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\DashboardView.baml
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\DashboardView.g.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\TablesView.g.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\TablesView.baml
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\MenuView.g.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\OrdersView.g.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\ReservationsView.g.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\MenuView.baml
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\OrdersView.baml
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\ReservationsView.baml

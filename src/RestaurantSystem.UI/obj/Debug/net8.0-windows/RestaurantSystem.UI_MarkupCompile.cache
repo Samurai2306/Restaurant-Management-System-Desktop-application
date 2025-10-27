@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\App.xaml
-42006611050
+9169842106
 22-1658342261
-15-1356686781
+25-2071237924
 246-1915147518
-MainWindow.xaml;Resources\Colors.xaml;Resources\ModuleStyles.xaml;Resources\Styles.xaml;
+MainWindow.xaml;Resources\Colors.xaml;Resources\ModuleStyles.xaml;Resources\Styles.xaml;Views\DashboardView.xaml;Views\MenuView.xaml;Views\OrdersView.xaml;Views\ReservationsView.xaml;Views\TablesView.xaml;
 
-True
+False
 

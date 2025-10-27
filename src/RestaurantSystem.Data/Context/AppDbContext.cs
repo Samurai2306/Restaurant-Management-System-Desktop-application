@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using RestaurantSystem.Core.Models;
+using System.Threading;
 
 namespace RestaurantSystem.Data.Context;
 
@@ -9,15 +10,15 @@ namespace RestaurantSystem.Data.Context;
 /// </summary>
 public class AppDbContext : DbContext
 {
-  private readonly IConfiguration _configuration;
+    private readonly IConfiguration? _configuration;
 
     public DbSet<Table> Tables { get; set; }
     public DbSet<Reservation> Reservations { get; set; }
     public DbSet<Dish> Dishes { get; set; }
     public DbSet<Order> Orders { get; set; }
-public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; }
 
-    public AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration configuration)
+    public AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration? configuration = null)
         : base(options)
     {
         _configuration = configuration;
@@ -27,7 +28,9 @@ public DbSet<OrderItem> OrderItems { get; set; }
     {
         if (!optionsBuilder.IsConfigured)
         {
-    optionsBuilder.UseSqlite(_configuration.GetConnectionString("DefaultConnection"));
+            var connectionString = _configuration?.GetConnectionString("DefaultConnection") 
+                                  ?? "Data Source=restaurant.db";
+            optionsBuilder.UseSqlite(connectionString);
         }
     }
 
@@ -84,38 +87,6 @@ public DbSet<OrderItem> OrderItems { get; set; }
   }
     }
 
-    /// <summary>
-    /// Initialize database with seed data
-  /// </summary>
-    public async Task InitializeDatabaseAsync()
-    {
-        // Ensure database is created
-        await Database.EnsureCreatedAsync();
-
-        // Add seed data if the database was just created
-        if (!Tables.Any())
-  {
-            // Add sample tables
-     var tables = new[]
-      {
-   new Table { Name = "Table 1", Location = Core.Enums.TableLocation.MainHall, SeatsCount = 4 },
-              new Table { Name = "Table 2", Location = Core.Enums.TableLocation.Window, SeatsCount = 2 },
-             new Table { Name = "Table 3", Location = Core.Enums.TableLocation.Terrace, SeatsCount = 6 }
-  };
-        Tables.AddRange(tables);
-         
-            // Add sample dishes
-      var dishes = new[]
-      {
-  new Dish { Name = "Caesar Salad", Category = Core.Enums.DishCategory.Salad, Price = 12.99m, CookingTimeMinutes = 15 },
-     new Dish { Name = "Margherita Pizza", Category = Core.Enums.DishCategory.MainCourse, Price = 15.99m, CookingTimeMinutes = 20 },
-       new Dish { Name = "Tiramisu", Category = Core.Enums.DishCategory.Dessert, Price = 8.99m, CookingTimeMinutes = 10 }
-            };
-            Dishes.AddRange(dishes);
-
-      await SaveChangesAsync();
-   }
-    }
 }
 
 /// <summary>

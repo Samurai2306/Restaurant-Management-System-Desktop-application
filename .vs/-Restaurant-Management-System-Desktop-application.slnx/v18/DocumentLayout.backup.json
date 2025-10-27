@@ -142,8 +142,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.UI\\Resources\\Styles.xaml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAFsAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-10-22T16:08:00.721Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:08:00.721Z"
             },
             {
               "$type": "Document",
@@ -155,8 +154,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.UI\\App.xaml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-10-22T16:07:12.315Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:07:12.315Z"
             },
             {
               "$type": "Document",
@@ -168,8 +166,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.UI\\ViewModels\\BaseViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAIoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:06:51.016Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:06:51.016Z"
             },
             {
               "$type": "Document",
@@ -181,8 +178,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.Data\\Context\\AppDbContext.cs",
               "ViewState": "AgIAAHwAAAAAAAAAAABRwH8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:06:31.915Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:06:31.915Z"
             },
             {
               "$type": "Document",
@@ -194,8 +190,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.Data\\Repositories\\GenericRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAGgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:06:17.775Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:06:17.775Z"
             },
             {
               "$type": "Document",
@@ -207,8 +202,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.Core\\Interfaces\\Services\\IServices.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:06:01.866Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:06:01.866Z"
             },
             {
               "$type": "Document",
@@ -233,8 +227,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.UI\\Resources\\ModuleStyles.xaml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-10-22T16:42:50.027Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:42:50.027Z"
             },
             {
               "$type": "Document",
@@ -246,8 +239,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.UI\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-22T16:40:09.556Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:40:09.556Z"
             },
             {
               "$type": "Document",
@@ -259,8 +251,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.UI\\ViewModels\\Reservations\\ReservationViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAD4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:33:50.278Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:33:50.278Z"
             },
             {
               "$type": "Document",
@@ -272,8 +263,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.UI\\ViewModels\\Tables\\TablesViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:33:04.7Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:33:04.7Z"
             },
             {
               "$type": "Document",
@@ -285,8 +275,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.UI\\ViewModels\\Tables\\TableViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:32:36.651Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:32:36.651Z"
             },
             {
               "$type": "Document",
@@ -298,8 +287,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.Data\\DependencyInjection.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:24:59.04Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:24:59.04Z"
             },
             {
               "$type": "Document",
@@ -311,8 +299,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.Data\\Repositories\\OrderRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAGIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:24:20.492Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:24:20.492Z"
             },
             {
               "$type": "Document",
@@ -324,8 +311,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.Data\\Repositories\\DishRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:24:02.478Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:24:02.478Z"
             },
             {
               "$type": "Document",
@@ -337,8 +323,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.Data\\Repositories\\ReservationRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:23:31.899Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:23:31.899Z"
             },
             {
               "$type": "Document",
@@ -350,8 +335,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.Data\\Repositories\\TableRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAFcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:23:16.165Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:23:16.165Z"
             },
             {
               "$type": "Document",
@@ -363,8 +347,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.Core\\Enums\\Enums.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAFQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:05:50.433Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:05:50.433Z"
             },
             {
               "$type": "Document",
@@ -376,8 +359,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.Data\\Configurations\\OrderItemConfiguration.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:21:27.78Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:21:27.78Z"
             },
             {
               "$type": "Document",
@@ -389,8 +371,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.Data\\Configurations\\OrderConfiguration.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:21:15.539Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:21:15.539Z"
             },
             {
               "$type": "Document",
@@ -402,8 +383,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.Core\\Interfaces\\IRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:05:36.681Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:05:36.681Z"
             },
             {
               "$type": "Document",
@@ -415,8 +395,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.Data\\Configurations\\ReservationConfiguration.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:20:33.445Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:20:33.445Z"
             },
             {
               "$type": "Document",
@@ -428,8 +407,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.Core\\Common\\Result.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:05:26.958Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:05:26.958Z"
             },
             {
               "$type": "Document",
@@ -441,8 +419,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.Data\\Configurations\\TableConfiguration.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:20:21.747Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:20:21.747Z"
             },
             {
               "$type": "Document",
@@ -454,8 +431,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.Core\\Models\\OrderItem.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:11:36.512Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:11:36.512Z"
             },
             {
               "$type": "Document",
@@ -467,8 +443,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.Core\\Models\\Order.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAGkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:11:19.966Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:11:19.966Z"
             },
             {
               "$type": "Document",
@@ -480,8 +455,7 @@
               "RelativeToolTip": "src\\RestaurantSystem.Core\\Models\\Dish.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAFkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T16:11:03.063Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T16:11:03.063Z"
             },
             {
               "$type": "Document",
@@ -493,8 +467,7 @@
               "RelativeToolTip": "scripts\\scaffold-solution.ps1",
               "ViewState": "AgIAAFgAAAAAAAAAAIBJwFoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-10-22T15:59:24.861Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T15:59:24.861Z"
             },
             {
               "$type": "Document",
@@ -506,8 +479,7 @@
               "RelativeToolTip": "scripts\\setup-environment.ps1",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-10-22T15:45:35.45Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T15:45:35.45Z"
             },
             {
               "$type": "Document",

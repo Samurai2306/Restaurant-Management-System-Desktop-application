@@ -35,20 +35,22 @@ public partial class OrderViewModel : ObservableObject
     [ObservableProperty]
     private decimal _totalAmount;
 
-  [ObservableProperty]
-    private ObservableCollection<OrderItemViewModel> _items;
+    [ObservableProperty]
+    private int _itemsCount;
+
+    [ObservableProperty]
+    private ObservableCollection<OrderItemViewModel> _items = new();
 
     public ICommand EditCommand { get; }
     public ICommand CancelCommand { get; }
     public ICommand CompleteCommand { get; }
     public ICommand AddItemCommand { get; }
 
-public OrderViewModel()
+    public OrderViewModel()
     {
-        Items = new ObservableCollection<OrderItemViewModel>();
         EditCommand = new RelayCommand(OnEdit);
         CancelCommand = new RelayCommand(OnCancel);
- CompleteCommand = new RelayCommand(OnComplete);
+        CompleteCommand = new RelayCommand(OnComplete);
         AddItemCommand = new RelayCommand(OnAddItem);
     }
 
