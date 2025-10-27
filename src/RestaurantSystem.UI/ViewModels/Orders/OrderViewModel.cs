@@ -30,7 +30,7 @@ public partial class OrderViewModel : ObservableObject
     private OrderStatus _status;
 
     [ObservableProperty]
-    private string _waiterId;
+    private int? _waiterId;
 
     [ObservableProperty]
     private decimal _totalAmount;

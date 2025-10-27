@@ -9,6 +9,7 @@ using RestaurantSystem.Core.Enums;
 using RestaurantSystem.Core.Interfaces.Repositories;
 using RestaurantSystem.UI.Services;
 using RestaurantSystem.Core.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace RestaurantSystem.UI.ViewModels.Orders;
 
@@ -156,10 +157,39 @@ public partial class OrdersViewModel : BaseViewModel
         }
     }
 
-    private void OnViewOrder()
+    private async void OnViewOrder()
     {
         if (SelectedOrder == null) return;
-        _dialogService.ShowInformation($"View order #{SelectedOrder.Id}", "Order Details");
+
+        try
+        {
+            // Get full order with items
+            var orderResult = await _orderRepository.GetByIdAsync(SelectedOrder.Id);
+            if (!orderResult.Succeeded || orderResult.Value == null)
+            {
+                _dialogService.ShowError("Failed to load order details", "Error");
+                return;
+            }
+
+            var order = orderResult.Value;
+            
+            // Get dish repository
+            var app = ((App)System.Windows.Application.Current);
+            var dishRepository = app.ServiceProvider.GetRequiredService<RestaurantSystem.Core.Interfaces.Repositories.IDishRepository>();
+            
+            var detailWindow = new Views.OrderDetailWindow(order, _orderRepository, dishRepository, _dialogService);
+            detailWindow.Owner = System.Windows.Application.Current.MainWindow;
+            
+            var result = detailWindow.ShowDialog();
+            if (result == true)
+            {
+                await LoadOrdersAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            _dialogService.ShowError($"Error viewing order: {ex.Message}", "Error");
+        }
     }
 
     private async Task OnCloseOrderAsync()

@@ -52,11 +52,11 @@
                 <!-- Title and Buttons -->
                 <Grid Grid.Row="0" Margin="0,0,0,20">
                     <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="Menu Management" 
+                        <TextBlock Text="Управление меню" 
                                  FontSize="28"
                                  FontWeight="SemiBold"
                                  Foreground="White"/>
-                        <TextBlock Text="Manage dishes and menu items"
+                        <TextBlock Text="Управление блюдами и пунктами меню"
                                  FontSize="14"
                                  Foreground="#999"
                                  Margin="0,6,0,0"/>
@@ -65,7 +65,7 @@
                     <StackPanel Orientation="Horizontal" 
                                HorizontalAlignment="Right"
                                VerticalAlignment="Center">
-                        <Button Content="ADD DISH" 
+                        <Button Content="ДОБАВИТЬ БЛЮДО" 
                                 Command="{Binding AddDishCommand}"
                                 Height="42"
                                 Padding="24,0"

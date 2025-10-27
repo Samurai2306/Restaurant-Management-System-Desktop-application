@@ -38,7 +38,8 @@ public class DishConfiguration : IEntityTypeConfiguration<Dish>
             .HasMaxLength(255);
 
         builder.Property(d => d.Tags)
-            .HasMaxLength(500);
+            .HasMaxLength(500)
+            .IsRequired(false);
 
         builder.Property(d => d.Allergens)
             .HasConversion<string>();

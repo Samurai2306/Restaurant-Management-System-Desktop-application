@@ -206,3 +206,15 @@ C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application
 C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\DishEditDialog.g.cs
 C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\OrderEditDialog.g.cs
 C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\ReservationEditDialog.g.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\AnalyticsView.g.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\AnalyticsView.baml
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\ProfileDialog.baml
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\ProfileDialog.g.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\LoginWindow.baml
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\LoginWindow.g.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\OrderDetailWindow.baml
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\OrderDetailWindow.g.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\OrderItemEditDialog.baml
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\OrderItemEditDialog.g.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\SettingsWindow.baml
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\SettingsWindow.g.cs

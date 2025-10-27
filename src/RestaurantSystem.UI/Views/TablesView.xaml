@@ -53,11 +53,11 @@
                 <!-- Title and Buttons -->
                 <Grid Grid.Row="0" Margin="0,0,0,20">
                     <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="Tables Management" 
+                            <TextBlock Text="Управление столами" 
                                      FontSize="28"
                                      FontWeight="SemiBold"
                                      Foreground="White"/>
-                            <TextBlock Text="Manage restaurant tables and their availability"
+                            <TextBlock Text="Управление столами ресторана и их доступностью"
                                      FontSize="14"
                                      Foreground="#999"
                                      Margin="0,6,0,0"/>
@@ -66,7 +66,7 @@
                     <StackPanel Orientation="Horizontal" 
                                HorizontalAlignment="Right"
                                VerticalAlignment="Center">
-                        <Button Content="ADD TABLE" 
+                        <Button Content="ДОБАВИТЬ СТОЛ" 
                                 Command="{Binding AddTableCommand}"
                                 Height="42"
                                 Padding="24,0"

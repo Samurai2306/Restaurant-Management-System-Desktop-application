@@ -32,3 +32,10 @@ public interface IOrderRepository : IRepository<Order>
     Task<Result<IEnumerable<Order>>> GetOrdersByTableAsync(int tableId);
     Task<Result<IEnumerable<Order>>> GetOrdersByDateRangeAsync(DateTime startDate, DateTime endDate);
 }
+
+public interface IUserRepository : IRepository<User>
+{
+    Task<Result<User?>> GetByUsernameAsync(string username);
+    Task<Result<IEnumerable<User>>> GetActiveUsersAsync();
+    Task<Result<IEnumerable<User>>> GetUsersByRoleAsync(UserRole role);
+}

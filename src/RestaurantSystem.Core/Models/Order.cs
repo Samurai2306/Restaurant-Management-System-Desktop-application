@@ -19,7 +19,7 @@ public class Order : BaseEntity
     [Required]
     public OrderStatus Status { get; set; }
 
-    public string WaiterId { get; set; }
+    public int? WaiterId { get; set; }
 
  // Navigation properties
     public virtual Table Table { get; set; }

@@ -83,3 +83,15 @@ public enum Allergen
     Sesame,
     Sulfites
 }
+
+/// <summary>
+/// Enum representing user roles
+/// </summary>
+public enum UserRole
+{
+    Admin,
+    Manager,
+    Waiter,
+    Chef,
+    User
+}

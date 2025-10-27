@@ -63,24 +63,45 @@ public class GenericRepository<T> : IRepository<T> where T : class
     public virtual async Task<Result> UpdateAsync(T entity)
     {
         try
-      {
-            // Check if entity is already tracked
-            var existingEntity = _context.Entry(entity);
-            if (existingEntity.State == EntityState.Detached)
+        {
+            // Get the key property value
+            var keyProperty = _context.Model.FindEntityType(typeof(T))?.FindPrimaryKey();
+            if (keyProperty == null)
             {
-                // Entity is not tracked, use Update
-                _dbSet.Update(entity);
+                return Result.Failure("Entity type does not have a primary key defined.");
+            }
+
+            // Get the key value from the entity
+            var keyValue = keyProperty.Properties.First().PropertyInfo.GetValue(entity);
+            if (keyValue == null)
+            {
+                return Result.Failure("Entity key value is null.");
+            }
+
+            // Try to find the existing tracked entity
+            var trackedEntity = await _dbSet.FindAsync(keyValue);
+            
+            if (trackedEntity != null)
+            {
+                // Copy values from entity to tracked entity
+                _context.Entry(trackedEntity).CurrentValues.SetValues(entity);
             }
             else
             {
-                // Entity is already tracked, mark properties as modified
-                existingEntity.State = EntityState.Modified;
+                // Entity not tracked, try to attach
+                var entry = _context.Entry(entity);
+                if (entry.State == EntityState.Detached)
+                {
+                    _dbSet.Attach(entity);
+                }
+                entry.State = EntityState.Modified;
             }
-      return Result.Success();
-  }
-      catch (Exception ex)
+            
+            return Result.Success();
+        }
+        catch (Exception ex)
         {
-       return Result.Failure($"Error updating entity: {ex.Message}");
+            return Result.Failure($"Error updating entity: {ex.Message}");
         }
     }
 

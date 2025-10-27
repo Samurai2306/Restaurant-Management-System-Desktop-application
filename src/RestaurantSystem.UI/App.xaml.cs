@@ -10,12 +10,15 @@ using RestaurantSystem.UI.ViewModels.Orders;
 using System.IO;
 using Microsoft.Extensions.Configuration;
 using RestaurantSystem.Data;
+using RestaurantSystem.Core.Interfaces.Repositories;
 
 namespace RestaurantSystem.UI;
 
 public partial class App : Application
 {
     private readonly IHost _host;
+
+    public IServiceProvider ServiceProvider => _host.Services;
 
     public App()
   {
@@ -41,9 +44,11 @@ public partial class App : Application
         // Register UI Services
         services.AddSingleton<Services.IDialogService, Services.DialogService>();
         services.AddSingleton<Services.INavigationService, Services.NavigationService>();
+        services.AddSingleton<RestaurantSystem.Core.Interfaces.Services.IAuthenticationService, Services.AuthenticationService>();
         
-        // Register MainWindow
+        // Register Windows
         services.AddSingleton<MainWindow>();
+        services.AddTransient<Views.LoginWindow>();
         
         // Register ViewModels
         services.AddSingleton<MainWindowViewModel>();
@@ -56,6 +61,17 @@ public partial class App : Application
         services.AddTransient<OrdersViewModel>();
         services.AddTransient<ViewModels.Orders.OrderViewModel>();
         services.AddTransient<ViewModels.Orders.OrderItemViewModel>();
+        services.AddTransient<AnalyticsViewModel>();
+    }
+    
+    private MainWindowViewModel CreateMainWindowViewModel(IServiceProvider services)
+    {
+        return new MainWindowViewModel(
+            services.GetRequiredService<TablesViewModel>(),
+            services.GetRequiredService<ReservationsViewModel>(),
+            services.GetRequiredService<MenuViewModel>(),
+            services.GetRequiredService<OrdersViewModel>(),
+            services.GetRequiredService<AnalyticsViewModel>());
     }
 
     protected override async void OnStartup(StartupEventArgs e)
@@ -69,18 +85,35 @@ public partial class App : Application
             // Initialize database
             await _host.Services.InitializeDatabaseAsync();
 
-            // Get the main window and ViewModel from DI
-            var mainWindow = _host.Services.GetRequiredService<MainWindow>();
-            var mainWindowViewModel = _host.Services.GetRequiredService<MainWindowViewModel>();
+            // Show login window first
+            var authService = _host.Services.GetRequiredService<RestaurantSystem.Core.Interfaces.Services.IAuthenticationService>();
+            var loginWindow = new Views.LoginWindow(authService);
             
-            // Set DataContext
-            mainWindow.DataContext = mainWindowViewModel;
+            var result = loginWindow.ShowDialog();
             
-            // Navigate to Tables view by default
-            mainWindowViewModel.NavigateTablesCommand.Execute(null);
-            
-            // Show the main window
-            mainWindow.Show();
+            if (result == true && loginWindow.LoggedInUser != null)
+            {
+                // User logged in successfully, show main window
+                var mainWindow = _host.Services.GetRequiredService<MainWindow>();
+                var mainWindowViewModel = CreateMainWindowViewModel(_host.Services);
+                
+                // Set DataContext
+                mainWindow.DataContext = mainWindowViewModel;
+                
+                // Navigate to Tables view by default
+                mainWindowViewModel.NavigateTablesCommand.Execute(null);
+                
+                // Set as main window BEFORE showing
+                MainWindow = mainWindow;
+                
+                // Show the main window
+                mainWindow.Show();
+            }
+            else
+            {
+                // User cancelled login or failed
+                Shutdown();
+            }
         }
         catch (Exception ex)
         {

@@ -135,10 +135,45 @@ public partial class MenuViewModel : BaseViewModel
         }
     }
 
-    private void OnEditDish()
+    private async void OnEditDish()
     {
         if (SelectedDish == null) return;
-        _dialogService.ShowInformation($"Edit dish '{SelectedDish.Name}'", "Edit Dish");
+
+        try
+        {
+            // Get full dish entity
+            var dishResult = await _dishRepository.GetByIdAsync(SelectedDish.Id);
+            if (!dishResult.Succeeded || dishResult.Value == null)
+            {
+                _dialogService.ShowError("Failed to load dish details", "Error");
+                return;
+            }
+
+            var dialog = new Views.DishEditDialog(dishResult.Value);
+            dialog.Owner = System.Windows.Application.Current.MainWindow;
+            
+            var result = dialog.ShowDialog();
+            if (result == true)
+            {
+                var updatedDish = dialog.GetDish();
+                var updateResult = await _dishRepository.UpdateAsync(updatedDish);
+                
+                if (updateResult.Succeeded)
+                {
+                    await _dishRepository.SaveChangesAsync();
+                    _dialogService.ShowInformation("Dish updated successfully!", "Success");
+                    await LoadDishesAsync();
+                }
+                else
+                {
+                    _dialogService.ShowError(string.Join("\n", updateResult.Errors), "Error");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _dialogService.ShowError($"Error editing dish: {ex.Message}\n\n{ex.StackTrace}", "Error");
+        }
     }
 
     private async Task OnDeleteDishAsync()

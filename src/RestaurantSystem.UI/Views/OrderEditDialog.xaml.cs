@@ -9,7 +9,7 @@ namespace RestaurantSystem.UI.Views;
 public partial class OrderEditDialog : Window
 {
     public int TableId { get; set; } = 1;
-    public string WaiterId { get; set; } = "WAITER01";
+    public string WaiterIdText { get; set; } = "WAITER01";
     public string SpecialInstructions { get; set; } = string.Empty;
     public List<Table> Tables { get; set; } = new();
 
@@ -27,14 +27,14 @@ public partial class OrderEditDialog : Window
     {
         Title = "Edit Order";
         TableId = order.TableId;
-        WaiterId = order.WaiterId ?? "WAITER01";
+        WaiterIdText = order.WaiterId?.ToString() ?? "1";
         SpecialInstructions = order.SpecialInstructions ?? string.Empty;
         
         // Set fields
         var tableItem = TableComboBox.Items.OfType<Table>().FirstOrDefault(t => t.Id == TableId);
         if (tableItem != null) TableComboBox.SelectedItem = tableItem;
         
-        WaiterTextBox.Text = WaiterId;
+        WaiterTextBox.Text = WaiterIdText;
         InstructionsTextBox.Text = SpecialInstructions;
     }
 
@@ -47,7 +47,7 @@ public partial class OrderEditDialog : Window
         }
 
         TableId = ((Table)TableComboBox.SelectedItem).Id;
-        WaiterId = WaiterTextBox.Text;
+        WaiterIdText = WaiterTextBox.Text;
         SpecialInstructions = InstructionsTextBox.Text;
         
         DialogResult = true;
@@ -65,7 +65,7 @@ public partial class OrderEditDialog : Window
         return new Order
         {
             TableId = TableId,
-            WaiterId = WaiterId,
+            WaiterId = int.TryParse(WaiterIdText, out var waiterId) ? waiterId : null,
             SpecialInstructions = SpecialInstructions,
             CreatedTime = DateTime.UtcNow
         };

@@ -46,7 +46,7 @@
                                            VerticalAlignment="Center"
                                            Foreground="White"
                                            Margin="0,0,12,0"/>
-                    <TextBlock Text="Restaurant Management System"
+                    <TextBlock Text="Система Управления Рестораном"
                              VerticalAlignment="Center"
                              FontSize="20"
                              FontWeight="SemiBold"
@@ -57,21 +57,27 @@
                           HorizontalAlignment="Right">
                     <Button Style="{StaticResource MaterialDesignIconButton}"
                           Margin="8,0"
-                          ToolTip="Notifications"
+                          ToolTip="Уведомления"
                           Click="NotificationButton_Click">
                         <materialDesign:PackIcon Kind="BellOutline" Foreground="White"/>
                     </Button>
                     <Button Style="{StaticResource MaterialDesignIconButton}"
                           Margin="8,0"
-                          ToolTip="Settings"
+                          ToolTip="Настройки"
                           Click="SettingsButton_Click">
                         <materialDesign:PackIcon Kind="Cog" Foreground="White"/>
                     </Button>
                     <Button Style="{StaticResource MaterialDesignIconButton}"
                           Margin="8,0"
-                          ToolTip="Account"
+                          ToolTip="Профиль"
                           Click="ProfileButton_Click">
                         <materialDesign:PackIcon Kind="AccountCircle" Foreground="White"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignIconButton}"
+                          Margin="8,0"
+                          ToolTip="Выход"
+                          Click="LogoutButton_Click">
+                        <materialDesign:PackIcon Kind="Logout" Foreground="White"/>
                     </Button>
                     <TextBlock Text="{Binding Source={x:Static local:App.Version}, StringFormat='v{0}'}"
                           Margin="16,0,16,0"
@@ -96,7 +102,7 @@
                         BorderBrush="#404040"
                         BorderThickness="0,0,1,0">
                     <StackPanel Margin="0,16,0,0">
-                        <TextBlock Text="NAVIGATION" 
+                        <TextBlock Text="НАВИГАЦИЯ" 
                                  FontSize="11"
                                  FontWeight="SemiBold"
                                  Margin="20,0,0,16"
@@ -111,7 +117,7 @@
                                 Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="🪑" FontSize="18" Margin="0,0,12,0"/>
-                                <TextBlock Text="Tables" FontSize="14" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Text="Столы" FontSize="14" VerticalAlignment="Center" Foreground="White"/>
                             </StackPanel>
                         </Button>
                         
@@ -124,7 +130,7 @@
                                 Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="📅" FontSize="18" Margin="0,0,12,0"/>
-                                <TextBlock Text="Reservations" FontSize="14" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Text="Бронирование" FontSize="14" VerticalAlignment="Center" Foreground="White"/>
                             </StackPanel>
                         </Button>
                         
@@ -137,7 +143,7 @@
                                 Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="🍽️" FontSize="18" Margin="0,0,12,0"/>
-                                <TextBlock Text="Menu" FontSize="14" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Text="Меню" FontSize="14" VerticalAlignment="Center" Foreground="White"/>
                             </StackPanel>
                         </Button>
                         
@@ -150,13 +156,14 @@
                                 Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="📋" FontSize="18" Margin="0,0,12,0"/>
-                                <TextBlock Text="Orders" FontSize="14" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Text="Заказы" FontSize="14" VerticalAlignment="Center" Foreground="White"/>
                             </StackPanel>
                         </Button>
                         
                         <Separator Margin="16,12" Background="#404040"/>
                         
-                        <Button Height="48"
+                        <Button Command="{Binding NavigateAnalyticsCommand}"
+                                Height="48"
                                 Background="Transparent"
                                 BorderThickness="0"
                                 HorizontalContentAlignment="Left"
@@ -164,7 +171,7 @@
                                 Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="📊" FontSize="18" Margin="0,0,12,0"/>
-                                <TextBlock Text="Analytics" FontSize="14" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Text="Аналитика" FontSize="14" VerticalAlignment="Center" Foreground="White"/>
                             </StackPanel>
                         </Button>
                     </StackPanel>
@@ -192,7 +199,7 @@
                                                VerticalAlignment="Center"
                                                Foreground="Green"
                                                Margin="0,0,6,0"/>
-                        <TextBlock Text="Ready"
+                        <TextBlock Text="Готово"
                                  VerticalAlignment="Center"
                                  FontSize="12"
                                  Foreground="#CCCCCC"/>

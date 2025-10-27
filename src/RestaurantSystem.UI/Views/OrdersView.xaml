@@ -52,11 +52,11 @@
                 <!-- Title and Buttons -->
                 <Grid Grid.Row="0" Margin="0,0,0,20">
                     <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="Orders Management" 
+                        <TextBlock Text="Управление заказами" 
                                  FontSize="28"
                                  FontWeight="SemiBold"
                                  Foreground="White"/>
-                        <TextBlock Text="Manage active and completed orders"
+                        <TextBlock Text="Управление активными и завершёнными заказами"
                                  FontSize="14"
                                  Foreground="#999"
                                  Margin="0,6,0,0"/>
@@ -65,7 +65,7 @@
                     <StackPanel Orientation="Horizontal" 
                                HorizontalAlignment="Right"
                                VerticalAlignment="Center">
-                        <Button Content="NEW ORDER" 
+                        <Button Content="НОВЫЙ ЗАКАЗ" 
                                 Command="{Binding AddOrderCommand}"
                                 Height="42"
                                 Padding="24,0"

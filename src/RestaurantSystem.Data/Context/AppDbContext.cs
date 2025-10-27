@@ -17,6 +17,7 @@ public class AppDbContext : DbContext
     public DbSet<Dish> Dishes { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<User> Users { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration? configuration = null)
         : base(options)
@@ -53,6 +54,9 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<Reservation>()
        .HasQueryFilter(r => !r.IsDeleted);
+
+        modelBuilder.Entity<User>()
+            .HasQueryFilter(u => !u.IsDeleted);
     }
 
     public override int SaveChanges()

@@ -143,10 +143,49 @@ public partial class ReservationsViewModel : BaseViewModel
         }
     }
 
-    private void OnEditReservation()
+    private async void OnEditReservation()
     {
         if (SelectedReservation == null) return;
-        _dialogService.ShowInformation($"Edit reservation for '{SelectedReservation.ClientName}'", "Edit Reservation");
+
+        try
+        {
+            // Get full reservation entity
+            var reservationResult = await _reservationRepository.GetByIdAsync(SelectedReservation.Id);
+            if (!reservationResult.Succeeded || reservationResult.Value == null)
+            {
+                _dialogService.ShowError("Failed to load reservation details", "Error");
+                return;
+            }
+
+            // Get available tables
+            var tablesResult = await _tableRepository.GetAllAsync();
+            var tables = tablesResult.Succeeded ? tablesResult.Value.ToList() : new List<Table>();
+
+            var dialog = new Views.ReservationEditDialog(reservationResult.Value, tables);
+            dialog.Owner = System.Windows.Application.Current.MainWindow;
+            
+            var result = dialog.ShowDialog();
+            if (result == true)
+            {
+                var updatedReservation = dialog.GetReservation();
+                var updateResult = await _reservationRepository.UpdateAsync(updatedReservation);
+                
+                if (updateResult.Succeeded)
+                {
+                    await _reservationRepository.SaveChangesAsync();
+                    _dialogService.ShowInformation("Reservation updated successfully!", "Success");
+                    await LoadReservationsAsync();
+                }
+                else
+                {
+                    _dialogService.ShowError(string.Join("\n", updateResult.Errors), "Error");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _dialogService.ShowError($"Error editing reservation: {ex.Message}\n\n{ex.StackTrace}", "Error");
+        }
     }
 
     private async Task OnCancelReservationAsync()

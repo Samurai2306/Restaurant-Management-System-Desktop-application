@@ -24,8 +24,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             .IsRequired()
             .HasConversion<string>();
 
-        builder.Property(o => o.WaiterId)
-            .HasMaxLength(50);
+        builder.Property(o => o.WaiterId);
 
         builder.Property(o => o.CreatedAt)
             .IsRequired();

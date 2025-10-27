@@ -52,11 +52,11 @@
                 
                 <Grid Grid.Row="0" Margin="0,0,0,20">
                     <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="Reservations" 
+                        <TextBlock Text="Бронирование" 
                                  FontSize="28"
                                  FontWeight="SemiBold"
                                  Foreground="White"/>
-                        <TextBlock Text="Manage table reservations"
+                        <TextBlock Text="Управление бронированием столов"
                                  FontSize="14"
                                  Foreground="#999"
                                  Margin="0,6,0,0"/>
@@ -65,7 +65,7 @@
                     <StackPanel Orientation="Horizontal" 
                                HorizontalAlignment="Right"
                                VerticalAlignment="Center">
-                        <Button Content="NEW RESERVATION" 
+                        <Button Content="НОВАЯ БРОНЬ" 
                                 Command="{Binding AddReservationCommand}"
                                 Height="42"
                                 Padding="24,0"
