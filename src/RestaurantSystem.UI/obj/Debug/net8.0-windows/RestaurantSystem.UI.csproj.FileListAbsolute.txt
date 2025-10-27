@@ -198,3 +198,5 @@ C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application
 C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\MenuView.baml
 C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\OrdersView.baml
 C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\ReservationsView.baml
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\TableEditDialog.baml
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\TableEditDialog.g.cs

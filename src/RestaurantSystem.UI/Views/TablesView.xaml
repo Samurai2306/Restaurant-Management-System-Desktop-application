@@ -8,7 +8,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
     
-    <Grid Margin="0" Background="#F5F5F5">
+    <Grid Margin="0" Background="#1E1E1E">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -16,9 +16,9 @@
 
         <!-- Header with Search -->
         <Border Grid.Row="0" 
-                Background="White"
+                Background="#2C2C2C"
                 Padding="24"
-                BorderBrush="#E0E0E0"
+                BorderBrush="#404040"
                 BorderThickness="0,0,0,1">
             <Grid>
                 <Grid.RowDefinitions>
@@ -29,13 +29,14 @@
                 <!-- Title and Buttons -->
                 <Grid Grid.Row="0" Margin="0,0,0,20">
                     <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="Tables Management" 
-                                 FontSize="28"
-                                 FontWeight="SemiBold"/>
-                        <TextBlock Text="Manage restaurant tables and their availability"
-                                 FontSize="14"
-                                 Foreground="#666"
-                                 Margin="0,6,0,0"/>
+                            <TextBlock Text="Tables Management" 
+                                     FontSize="28"
+                                     FontWeight="SemiBold"
+                                     Foreground="White"/>
+                            <TextBlock Text="Manage restaurant tables and their availability"
+                                     FontSize="14"
+                                     Foreground="#999"
+                                     Margin="0,6,0,0"/>
                     </StackPanel>
                     
                     <StackPanel Orientation="Horizontal" 
@@ -80,15 +81,17 @@
                 
                 <!-- Search -->
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                             Width="350"
-                             Height="42"
-                             Padding="14,0"
-                             VerticalContentAlignment="Center"
-                             FontSize="14"
-                             BorderBrush="#E0E0E0"
-                             BorderThickness="1"
-                             materialDesign:HintAssist.Hint="Search tables by name..."/>
+                            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                 Width="350"
+                                 Height="42"
+                                 Padding="14,0"
+                                 VerticalContentAlignment="Center"
+                                 FontSize="14"
+                                 Background="#404040"
+                                 Foreground="White"
+                                 BorderBrush="#666"
+                                 BorderThickness="1"
+                                 materialDesign:HintAssist.Hint="Search tables by name..."/>
                     
                     <Button Content="SEARCH"
                             Command="{Binding SearchCommand}"
@@ -111,13 +114,13 @@
             </Grid>
         </Border>
 
-        <!-- Tables DataGrid -->
-        <Border Grid.Row="1"
-                Background="White"
-                Margin="24"
-                CornerRadius="8"
-                BorderBrush="#E0E0E0"
-                BorderThickness="1">
+            <!-- Tables DataGrid -->
+            <Border Grid.Row="1"
+                    Background="#2C2C2C"
+                    Margin="24"
+                    CornerRadius="8"
+                    BorderBrush="#404040"
+                    BorderThickness="1">
             <DataGrid ItemsSource="{Binding Tables}"
                      SelectedItem="{Binding SelectedTable}"
                      AutoGenerateColumns="False"

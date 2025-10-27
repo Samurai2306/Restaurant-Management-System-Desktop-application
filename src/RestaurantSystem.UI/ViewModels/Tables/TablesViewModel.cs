@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -77,18 +78,76 @@ public partial class TablesViewModel : BaseViewModel
         });
     }
 
-    private void OnAddTable()
+    private async void OnAddTable()
     {
-        _dialogService.ShowInformation("Add Table dialog will be implemented", "Add Table");
-        // TODO: Show add table dialog
+        try
+        {
+            var dialog = new Views.TableEditDialog();
+            dialog.Owner = System.Windows.Application.Current.MainWindow;
+            
+            var result = dialog.ShowDialog();
+            if (result == true)
+            {
+                var table = dialog.GetTable();
+                var addResult = await _tableRepository.AddAsync(table);
+                
+                if (addResult.Succeeded)
+                {
+                    await _tableRepository.SaveChangesAsync();
+                    _dialogService.ShowInformation("Table added successfully!", "Success");
+                    await LoadTablesAsync();
+                }
+                else
+                {
+                    _dialogService.ShowError(string.Join("\n", addResult.Errors), "Error");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _dialogService.ShowError($"Error adding table: {ex.Message}\n\n{ex.StackTrace}", "Error");
+        }
     }
 
-    private void OnEditTable()
+    private async void OnEditTable()
     {
-        if (SelectedTable == null) return;
-        
-        _dialogService.ShowInformation($"Edit table '{SelectedTable.Name}'", "Edit Table");
-        // TODO: Show edit table dialog
+        try
+        {
+            if (SelectedTable == null) return;
+
+            // Get full table entity
+            var tableResult = await _tableRepository.GetByIdAsync(SelectedTable.Id);
+            if (!tableResult.Succeeded || tableResult.Value == null)
+            {
+                _dialogService.ShowError("Failed to load table details", "Error");
+                return;
+            }
+
+            var dialog = new Views.TableEditDialog(tableResult.Value);
+            dialog.Owner = System.Windows.Application.Current.MainWindow;
+            
+            var result = dialog.ShowDialog();
+            if (result == true)
+            {
+                var updatedTable = dialog.GetTable();
+                var updateResult = await _tableRepository.UpdateAsync(updatedTable);
+                
+                if (updateResult.Succeeded)
+                {
+                    await _tableRepository.SaveChangesAsync();
+                    _dialogService.ShowInformation("Table updated successfully!", "Success");
+                    await LoadTablesAsync();
+                }
+                else
+                {
+                    _dialogService.ShowError(string.Join("\n", updateResult.Errors), "Error");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _dialogService.ShowError($"Error editing table: {ex.Message}\n\n{ex.StackTrace}", "Error");
+        }
     }
 
     private async Task OnDeleteTableAsync()

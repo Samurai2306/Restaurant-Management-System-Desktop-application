@@ -52,28 +52,48 @@
                              FontWeight="SemiBold"
                              Foreground="White"/>
                 </StackPanel>
-                <TextBlock Text="{Binding Source={x:Static local:App.Version}, StringFormat='v{0}'}"
+                <StackPanel Orientation="Horizontal"
                           DockPanel.Dock="Right"
-                          HorizontalAlignment="Right"
+                          HorizontalAlignment="Right">
+                    <Button Style="{StaticResource MaterialDesignIconButton}"
+                          Margin="8,0"
+                          ToolTip="Notifications"
+                          Click="NotificationButton_Click">
+                        <materialDesign:PackIcon Kind="BellOutline" Foreground="White"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignIconButton}"
+                          Margin="8,0"
+                          ToolTip="Settings"
+                          Click="SettingsButton_Click">
+                        <materialDesign:PackIcon Kind="Cog" Foreground="White"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignIconButton}"
+                          Margin="8,0"
+                          ToolTip="Account"
+                          Click="ProfileButton_Click">
+                        <materialDesign:PackIcon Kind="AccountCircle" Foreground="White"/>
+                    </Button>
+                    <TextBlock Text="{Binding Source={x:Static local:App.Version}, StringFormat='v{0}'}"
+                          Margin="16,0,16,0"
                           VerticalAlignment="Center"
                           FontSize="13"
                           Foreground="White"
-                          Opacity="0.8"
-                          Margin="0,0,16,0"/>
+                          Opacity="0.8"/>
+                </StackPanel>
             </DockPanel>
         </materialDesign:ColorZone>
 
-      <!-- Main Content -->
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="240" MinWidth="200" MaxWidth="300"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+            <!-- Main Content -->
+            <Grid Grid.Row="1" Background="#1E1E1E">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="240" MinWidth="200" MaxWidth="300"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
                 <!-- Navigation Menu -->
                 <Border Grid.Column="0" 
-                        Background="#FAFAFA"
-                        BorderBrush="#E0E0E0"
+                        Background="#2C2C2C"
+                        BorderBrush="#404040"
                         BorderThickness="0,0,1,0">
                     <StackPanel Margin="0,16,0,0">
                         <TextBlock Text="NAVIGATION" 
@@ -91,7 +111,7 @@
                                 Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="🪑" FontSize="18" Margin="0,0,12,0"/>
-                                <TextBlock Text="Tables" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="Tables" FontSize="14" VerticalAlignment="Center" Foreground="White"/>
                             </StackPanel>
                         </Button>
                         
@@ -104,7 +124,7 @@
                                 Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="📅" FontSize="18" Margin="0,0,12,0"/>
-                                <TextBlock Text="Reservations" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="Reservations" FontSize="14" VerticalAlignment="Center" Foreground="White"/>
                             </StackPanel>
                         </Button>
                         
@@ -117,7 +137,7 @@
                                 Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="🍽️" FontSize="18" Margin="0,0,12,0"/>
-                                <TextBlock Text="Menu" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="Menu" FontSize="14" VerticalAlignment="Center" Foreground="White"/>
                             </StackPanel>
                         </Button>
                         
@@ -130,11 +150,11 @@
                                 Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="📋" FontSize="18" Margin="0,0,12,0"/>
-                                <TextBlock Text="Orders" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="Orders" FontSize="14" VerticalAlignment="Center" Foreground="White"/>
                             </StackPanel>
                         </Button>
                         
-                        <Separator Margin="16,12" Background="#E0E0E0"/>
+                        <Separator Margin="16,12" Background="#404040"/>
                         
                         <Button Height="48"
                                 Background="Transparent"
@@ -144,7 +164,7 @@
                                 Cursor="Hand">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="📊" FontSize="18" Margin="0,0,12,0"/>
-                                <TextBlock Text="Analytics" FontSize="14" VerticalAlignment="Center"/>
+                                <TextBlock Text="Analytics" FontSize="14" VerticalAlignment="Center" Foreground="White"/>
                             </StackPanel>
                         </Button>
                     </StackPanel>
@@ -153,34 +173,43 @@
                 <!-- Content Area -->
                 <ContentControl Grid.Column="1"
                                Margin="16"
-                               Content="{Binding CurrentView}"/>
+                               Content="{Binding CurrentView}"
+                               Background="#1E1E1E"/>
         </Grid>
 
-        <!-- Status Bar -->
-        <materialDesign:ColorZone Mode="Standard" 
-                                Grid.Row="2"
-                                Height="28"
-                                Padding="12,0">
-            <DockPanel>
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
-                    <materialDesign:PackIcon Kind="CheckCircle" 
-                                           Width="14" 
-                                           Height="14"
-                                           VerticalAlignment="Center"
-                                           Foreground="Green"
-                                           Margin="0,0,6,0"/>
-                    <TextBlock Text="Ready"
+            <!-- Status Bar -->
+            <Border Grid.Row="2"
+                    Height="28"
+                    Background="#2C2C2C"
+                    BorderBrush="#404040"
+                    BorderThickness="0,1,0,0"
+                    Padding="12,0">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                        <materialDesign:PackIcon Kind="CheckCircle" 
+                                               Width="14" 
+                                               Height="14"
+                                               VerticalAlignment="Center"
+                                               Foreground="Green"
+                                               Margin="0,0,6,0"/>
+                        <TextBlock Text="Ready"
+                                 VerticalAlignment="Center"
+                                 FontSize="12"
+                                 Foreground="#CCCCCC"/>
+                    </StackPanel>
+                    <TextBlock Text="{Binding Source={x:Static local:App.Version}, StringFormat='Version {0}'}"
+                             DockPanel.Dock="Right"
+                             HorizontalAlignment="Right"
                              VerticalAlignment="Center"
-                             FontSize="12"/>
-                </StackPanel>
-                <TextBlock Text="{Binding Source={x:Static local:App.Version}, StringFormat='Version {0}'}"
-                         DockPanel.Dock="Right"
-                         HorizontalAlignment="Right"
-                         VerticalAlignment="Center"
-                         FontSize="11"
-                         Foreground="{StaticResource TextSecondaryBrush}"/>
-            </DockPanel>
-        </materialDesign:ColorZone>
-    </Grid>
+                             FontSize="11"
+                             Foreground="#999"/>
+                </DockPanel>
+            </Border>
+        </Grid>
 
-</mahapps:MetroWindow>
+        <Window.Resources>
+            <Style x:Key="DarkThemeStyle" TargetType="Window">
+                <Setter Property="Background" Value="#1E1E1E"/>
+            </Style>
+        </Window.Resources>
+    </mahapps:MetroWindow>
