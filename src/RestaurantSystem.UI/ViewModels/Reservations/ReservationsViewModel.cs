@@ -1,15 +1,22 @@
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using RestaurantSystem.Core.Interfaces.Repositories;
+using RestaurantSystem.Core.Interfaces;
 using RestaurantSystem.UI.Services;
+using RestaurantSystem.Core.Enums;
+using RestaurantSystem.Core.Models;
 
 namespace RestaurantSystem.UI.ViewModels.Reservations;
 
 public partial class ReservationsViewModel : BaseViewModel
 {
     private readonly IReservationRepository _reservationRepository;
+    private readonly ITableRepository _tableRepository;
     private readonly IDialogService _dialogService;
 
     [ObservableProperty]
@@ -23,6 +30,14 @@ public partial class ReservationsViewModel : BaseViewModel
 
     [ObservableProperty]
     private int? _selectedTableId;
+    
+    [ObservableProperty]
+    private string _searchText = string.Empty;
+    
+    partial void OnSearchTextChanged(string? value)
+    {
+        _ = LoadReservationsAsync();
+    }
 
     public ICommand RefreshCommand { get; }
     public ICommand AddReservationCommand { get; }
@@ -30,9 +45,10 @@ public partial class ReservationsViewModel : BaseViewModel
     public ICommand CancelReservationCommand { get; }
     public ICommand DateChangedCommand { get; }
 
-    public ReservationsViewModel(IReservationRepository reservationRepository, IDialogService dialogService)
+    public ReservationsViewModel(IReservationRepository reservationRepository, ITableRepository tableRepository, IDialogService dialogService)
     {
         _reservationRepository = reservationRepository;
+        _tableRepository = tableRepository;
         _dialogService = dialogService;
         
         Title = "Reservations Management";
@@ -56,7 +72,24 @@ public partial class ReservationsViewModel : BaseViewModel
             
             if (result.Succeeded)
             {
-                foreach (var reservation in result.Value)
+                var filtered = result.Value.AsQueryable();
+                
+                // Apply search filter
+                if (!string.IsNullOrEmpty(SearchText))
+                {
+                    filtered = filtered.Where(r =>
+                        (!string.IsNullOrEmpty(r.ClientName) && r.ClientName.Contains(SearchText, StringComparison.OrdinalIgnoreCase)) ||
+                        (!string.IsNullOrEmpty(r.ClientPhone) && r.ClientPhone.Contains(SearchText, StringComparison.OrdinalIgnoreCase)) ||
+                        (r.Table != null && !string.IsNullOrEmpty(r.Table.Name) && r.Table.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase)));
+                }
+                
+                // Apply table filter
+                if (SelectedTableId.HasValue)
+                {
+                    filtered = filtered.Where(r => r.TableId == SelectedTableId.Value);
+                }
+                
+                foreach (var reservation in filtered)
                 {
                     Reservations.Add(new ReservationViewModel
                     {
@@ -75,9 +108,39 @@ public partial class ReservationsViewModel : BaseViewModel
         });
     }
 
-    private void OnAddReservation()
+    private async void OnAddReservation()
     {
-        _dialogService.ShowInformation("Add Reservation dialog will be implemented", "Add Reservation");
+        try
+        {
+            // Get available tables
+            var tablesResult = await _tableRepository.GetAllAsync();
+            var tables = tablesResult.Succeeded ? tablesResult.Value.ToList() : new List<RestaurantSystem.Core.Models.Table>();
+            
+            var dialog = new Views.ReservationEditDialog(tables);
+            dialog.Owner = System.Windows.Application.Current.MainWindow;
+            
+            var result = dialog.ShowDialog();
+            if (result == true)
+            {
+                var reservation = dialog.GetReservation();
+                var addResult = await _reservationRepository.AddAsync(reservation);
+                
+                if (addResult.Succeeded)
+                {
+                    await _reservationRepository.SaveChangesAsync();
+                    _dialogService.ShowInformation("Reservation added successfully!", "Success");
+                    await LoadReservationsAsync();
+                }
+                else
+                {
+                    _dialogService.ShowError(string.Join("\n", addResult.Errors), "Error");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _dialogService.ShowError($"Error adding reservation: {ex.Message}", "Error");
+        }
     }
 
     private void OnEditReservation()

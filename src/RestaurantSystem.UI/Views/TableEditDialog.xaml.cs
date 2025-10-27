@@ -135,7 +135,7 @@ public partial class TableEditDialog : Window
             Name = TableName,
             Location = Location,
             SeatsCount = SeatsCount,
-            IsActive = IsActive
+            IsActive = IsTableActive
         };
 
         if (TableId.HasValue)

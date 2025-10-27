@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -21,10 +22,20 @@ public partial class TablesViewModel : BaseViewModel
     private TableViewModel? _selectedTable;
 
     [ObservableProperty]
-    private TableLocation? _selectedLocation;
+    private string _selectedLocation = "";
+    
+    partial void OnSelectedLocationChanged(string? value)
+    {
+        _ = LoadTablesAsync();
+    }
 
     [ObservableProperty]
     private string _searchText = string.Empty;
+    
+    partial void OnSearchTextChanged(string? value)
+    {
+        _ = LoadTablesAsync();
+    }
 
     public ICommand RefreshCommand { get; }
     public ICommand AddTableCommand { get; }
@@ -45,7 +56,7 @@ public partial class TablesViewModel : BaseViewModel
         AddTableCommand = new RelayCommand(OnAddTable);
         EditTableCommand = new RelayCommand(OnEditTable, () => SelectedTable != null);
         DeleteTableCommand = new AsyncRelayCommand(OnDeleteTableAsync, () => SelectedTable != null);
-        FilterByLocationCommand = new AsyncRelayCommand<TableLocation?>(OnFilterByLocationAsync);
+        FilterByLocationCommand = new AsyncRelayCommand<string?>(OnFilterByLocationAsync);
         SearchCommand = new AsyncRelayCommand(OnSearchAsync);
 
         // Initial load
@@ -62,7 +73,24 @@ public partial class TablesViewModel : BaseViewModel
             
             if (result.Succeeded)
             {
-                foreach (var table in result.Value)
+                var filtered = result.Value.AsQueryable();
+                
+                // Apply location filter
+                if (!string.IsNullOrEmpty(SelectedLocation))
+                {
+                    if (Enum.TryParse<TableLocation>(SelectedLocation, true, out var location))
+                    {
+                        filtered = filtered.Where(t => t.Location == location);
+                    }
+                }
+                
+                // Apply search filter
+                if (!string.IsNullOrEmpty(SearchText))
+                {
+                    filtered = filtered.Where(t => t.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
+                }
+                
+                foreach (var table in filtered)
                 {
                     Tables.Add(new TableViewModel
                     {
@@ -177,7 +205,7 @@ public partial class TablesViewModel : BaseViewModel
         });
     }
 
-    private async Task OnFilterByLocationAsync(TableLocation? location)
+    private async Task OnFilterByLocationAsync(string? location)
     {
         SelectedLocation = location;
 
@@ -189,23 +217,26 @@ public partial class TablesViewModel : BaseViewModel
 
         await ExecuteAsync(async () =>
         {
-            var result = await _tableRepository.GetTablesByLocationAsync(location.Value);
-            
-            Tables.Clear();
-            
-            if (result.Succeeded)
+            if (Enum.TryParse<TableLocation>(SelectedLocation, true, out var locationEnum))
             {
-                foreach (var table in result.Value)
+                var result = await _tableRepository.GetTablesByLocationAsync(locationEnum);
+                
+                Tables.Clear();
+                
+                if (result.Succeeded)
                 {
-                    Tables.Add(new TableViewModel
+                    foreach (var table in result.Value)
                     {
-                        Id = table.Id,
-                        Name = table.Name,
-                        Location = table.Location,
-                        SeatsCount = table.SeatsCount,
-                        IsActive = table.IsActive,
-                        Status = table.GetStatus(DateTime.Now)
-                    });
+                        Tables.Add(new TableViewModel
+                        {
+                            Id = table.Id,
+                            Name = table.Name,
+                            Location = table.Location,
+                            SeatsCount = table.SeatsCount,
+                            IsActive = table.IsActive,
+                            Status = table.GetStatus(DateTime.Now)
+                        });
+                    }
                 }
             }
         });

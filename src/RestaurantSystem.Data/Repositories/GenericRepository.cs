@@ -64,7 +64,18 @@ public class GenericRepository<T> : IRepository<T> where T : class
     {
         try
       {
-     _dbSet.Update(entity);
+            // Check if entity is already tracked
+            var existingEntity = _context.Entry(entity);
+            if (existingEntity.State == EntityState.Detached)
+            {
+                // Entity is not tracked, use Update
+                _dbSet.Update(entity);
+            }
+            else
+            {
+                // Entity is already tracked, mark properties as modified
+                existingEntity.State = EntityState.Modified;
+            }
       return Result.Success();
   }
       catch (Exception ex)

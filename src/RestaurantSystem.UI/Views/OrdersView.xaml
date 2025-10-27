@@ -8,7 +8,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
     
-    <Grid Margin="0" Background="#F5F5F5">
+    <Grid Margin="0" Background="#1E1E1E">
+        <Grid.Resources>
+            <Style TargetType="ComboBoxItem">
+                <Setter Property="Background" Value="#404040"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Padding" Value="12,8"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Style.Triggers>
+                    <Trigger Property="IsHighlighted" Value="True">
+                        <Setter Property="Background" Value="#505050"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            
+            <Style TargetType="ComboBox">
+                <Setter Property="Background" Value="#404040"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Style.Triggers>
+                    <Trigger Property="IsDropDownOpen" Value="True">
+                        <Setter Property="Background" Value="#505050"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -16,81 +39,148 @@
 
         <!-- Header -->
         <Border Grid.Row="0" 
-                Background="White"
+                Background="#2C2C2C"
                 Padding="24"
-                BorderBrush="#E0E0E0"
+                BorderBrush="#404040"
                 BorderThickness="0,0,0,1">
             <Grid>
-                <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="Orders Management" 
-                             FontSize="28"
-                             FontWeight="SemiBold"/>
-                    <TextBlock Text="Manage active and completed orders"
-                             FontSize="14"
-                             Foreground="#666"
-                             Margin="0,6,0,0"/>
-                </StackPanel>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
                 
-                <StackPanel Orientation="Horizontal" 
-                           HorizontalAlignment="Right"
-                           VerticalAlignment="Center">
-                    <Button Content="NEW ORDER" 
-                            Command="{Binding AddOrderCommand}"
-                            Height="42"
-                            Padding="24,0"
-                            FontWeight="SemiBold"
-                            FontSize="13"
-                            Margin="0,0,12,0"
-                            Background="#673AB7"
-                            Foreground="White"
-                            BorderThickness="0"
-                            Cursor="Hand"/>
-                    <Button Content="↻" 
-                            Command="{Binding RefreshCommand}"
-                            Height="42"
-                            Width="42"
-                            FontSize="18"
-                            FontWeight="Bold"
-                            Background="White"
-                            Foreground="#673AB7"
-                            BorderBrush="#E0E0E0"
-                            BorderThickness="1"
-                            Cursor="Hand"/>
+                <!-- Title and Buttons -->
+                <Grid Grid.Row="0" Margin="0,0,0,20">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Orders Management" 
+                                 FontSize="28"
+                                 FontWeight="SemiBold"
+                                 Foreground="White"/>
+                        <TextBlock Text="Manage active and completed orders"
+                                 FontSize="14"
+                                 Foreground="#999"
+                                 Margin="0,6,0,0"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" 
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center">
+                        <Button Content="NEW ORDER" 
+                                Command="{Binding AddOrderCommand}"
+                                Height="42"
+                                Padding="24,0"
+                                FontWeight="SemiBold"
+                                FontSize="13"
+                                Margin="0,0,12,0"
+                                Background="#673AB7"
+                                Foreground="White"
+                                BorderThickness="0"
+                                Cursor="Hand">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="6"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                        <Button Content="↻" 
+                                Command="{Binding RefreshCommand}"
+                                Height="42"
+                                Width="42"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Background="White"
+                                Foreground="#673AB7"
+                                BorderBrush="#E0E0E0"
+                                BorderThickness="1"
+                                Cursor="Hand">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="6"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                
+                <!-- Search -->
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                             Width="400"
+                             Height="42"
+                             Padding="14,0"
+                             VerticalContentAlignment="Center"
+                             FontSize="14"
+                             Background="#404040"
+                             Foreground="White"
+                             BorderBrush="#666"
+                             BorderThickness="1"
+                             materialDesign:HintAssist.Hint="Search by table or order..."/>
                 </StackPanel>
             </Grid>
         </Border>
 
         <!-- Orders Grid -->
         <Border Grid.Row="1"
-                Background="White"
+                Background="#2C2C2C"
                 Margin="24"
                 CornerRadius="8"
-                BorderBrush="#E0E0E0"
+                BorderBrush="#404040"
                 BorderThickness="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
             <DataGrid ItemsSource="{Binding Orders}"
                      SelectedItem="{Binding SelectedOrder}"
                      AutoGenerateColumns="False"
                      CanUserAddRows="False"
+                     CanUserDeleteRows="False"
                      HeadersVisibility="All"
                      GridLinesVisibility="None"
+                     SelectionMode="Single"
                      IsReadOnly="True"
                      RowHeight="60"
                      FontSize="14"
-                     BorderThickness="0">
+                     BorderThickness="0"
+                     Background="Transparent"
+                     MaxHeight="600">
+                
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#505050"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="FontSize" Value="13"/>
+                        <Setter Property="Padding" Value="16,12"/>
+                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        <Setter Property="BorderBrush" Value="#666666"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="#404040"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        <Setter Property="BorderBrush" Value="#555555"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#505050"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Order #" Binding="{Binding Id}" Width="80"/>
-                    <DataGridTextColumn Header="Table" Binding="{Binding TableName}" Width="*"/>
-                    <DataGridTextColumn Header="Created" Binding="{Binding CreatedTime, StringFormat='dd.MM.yyyy HH:mm'}" Width="150"/>
-                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="120"/>
-                    <DataGridTextColumn Header="Total" Binding="{Binding TotalAmount, StringFormat='${0:F2}'}" Width="100"/>
-                    <DataGridTextColumn Header="Items" Binding="{Binding ItemsCount}" Width="80"/>
-                    <DataGridTemplateColumn Header="Actions" Width="180">
+                    <DataGridTextColumn Header="Order #" Binding="{Binding Id}" Width="Auto" FontWeight="Medium"/>
+                    <DataGridTextColumn Header="Table" Binding="{Binding TableName}" Width="Auto"/>
+                    <DataGridTextColumn Header="Created" Binding="{Binding CreatedTime, StringFormat='{}{0:dd.MM.yyyy HH:mm}'}" Width="Auto"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="Auto"/>
+                    <DataGridTextColumn Header="Total" Binding="{Binding TotalAmount, StringFormat='${0:F2}'}" Width="Auto"/>
+                    <DataGridTextColumn Header="Items" Binding="{Binding ItemsCount}" Width="Auto"/>
+                    <DataGridTemplateColumn Header="Actions" Width="Auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <Button Content="View"
                                            Command="{Binding DataContext.ViewOrderCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                           Height="32"
                                            Padding="12,0"
                                            Margin="0,0,8,0"
                                            Background="Transparent"
@@ -98,16 +188,17 @@
                                            BorderBrush="#673AB7"
                                            BorderThickness="1"
                                            FontSize="12"
+                                           FontWeight="Medium"
                                            Cursor="Hand"/>
                                     <Button Content="Close"
                                            Command="{Binding DataContext.CloseOrderCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                           Height="32"
                                            Padding="12,0"
                                            Background="Transparent"
                                            Foreground="#4CAF50"
                                            BorderBrush="#4CAF50"
                                            BorderThickness="1"
                                            FontSize="12"
+                                           FontWeight="Medium"
                                            Cursor="Hand"/>
                                 </StackPanel>
                             </DataTemplate>
@@ -115,6 +206,7 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
+            </ScrollViewer>
         </Border>
     </Grid>
 </UserControl>

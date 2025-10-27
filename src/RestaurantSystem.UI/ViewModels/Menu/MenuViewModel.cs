@@ -1,4 +1,6 @@
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -24,6 +26,16 @@ public partial class MenuViewModel : BaseViewModel
 
     [ObservableProperty]
     private string _searchText = string.Empty;
+    
+    partial void OnSearchTextChanged(string? value)
+    {
+        _ = LoadDishesAsync();
+    }
+    
+    partial void OnSelectedCategoryChanged(DishCategory? value)
+    {
+        _ = LoadDishesAsync();
+    }
 
     [ObservableProperty]
     private ObservableCollection<string> _selectedTags = new();
@@ -92,9 +104,35 @@ public partial class MenuViewModel : BaseViewModel
         });
     }
 
-    private void OnAddDish()
+    private async void OnAddDish()
     {
-        _dialogService.ShowInformation("Add Dish dialog will be implemented", "Add Dish");
+        try
+        {
+            var dialog = new Views.DishEditDialog();
+            dialog.Owner = System.Windows.Application.Current.MainWindow;
+            
+            var result = dialog.ShowDialog();
+            if (result == true)
+            {
+                var dish = dialog.GetDish();
+                var addResult = await _dishRepository.AddAsync(dish);
+                
+                if (addResult.Succeeded)
+                {
+                    await _dishRepository.SaveChangesAsync();
+                    _dialogService.ShowInformation("Dish added successfully!", "Success");
+                    await LoadDishesAsync();
+                }
+                else
+                {
+                    _dialogService.ShowError(string.Join("\n", addResult.Errors), "Error");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _dialogService.ShowError($"Error adding dish: {ex.Message}", "Error");
+        }
     }
 
     private void OnEditDish()

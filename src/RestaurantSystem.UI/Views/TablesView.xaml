@@ -9,6 +9,30 @@
              mc:Ignorable="d">
     
     <Grid Margin="0" Background="#1E1E1E">
+        <Grid.Resources>
+            <!-- ComboBox Dark Style -->
+            <Style TargetType="ComboBoxItem">
+                <Setter Property="Background" Value="#404040"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Padding" Value="12,8"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Style.Triggers>
+                    <Trigger Property="IsHighlighted" Value="True">
+                        <Setter Property="Background" Value="#505050"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            
+            <Style TargetType="ComboBox">
+                <Setter Property="Background" Value="#404040"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Style.Triggers>
+                    <Trigger Property="IsDropDownOpen" Value="True">
+                        <Setter Property="Background" Value="#505050"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -79,10 +103,10 @@
                     </StackPanel>
                 </Grid>
                 
-                <!-- Search -->
-                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <!-- Search and Filters -->
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
                             <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                                 Width="350"
+                                 Width="300"
                                  Height="42"
                                  Padding="14,0"
                                  VerticalContentAlignment="Center"
@@ -92,6 +116,24 @@
                                  BorderBrush="#666"
                                  BorderThickness="1"
                                  materialDesign:HintAssist.Hint="Search tables by name..."/>
+                    
+                        <ComboBox Width="180"
+                                 Height="42"
+                                 Padding="12,0"
+                                 Margin="12,0,0,0"
+                                 Background="#404040"
+                                 Foreground="White"
+                                 BorderBrush="#666"
+                                 BorderThickness="1"
+                                 SelectedValue="{Binding SelectedLocation}"
+                                 SelectedValuePath="Tag">
+                            <ComboBoxItem Content="All Locations" Tag=""/>
+                            <ComboBoxItem Content="Main Hall" Tag="MainHall"/>
+                            <ComboBoxItem Content="Terrace" Tag="Terrace"/>
+                            <ComboBoxItem Content="Window" Tag="Window"/>
+                            <ComboBoxItem Content="VIP Room" Tag="VipRoom"/>
+                            <ComboBoxItem Content="Bar" Tag="Bar"/>
+                        </ComboBox>
                     
                     <Button Content="SEARCH"
                             Command="{Binding SearchCommand}"
@@ -121,6 +163,7 @@
                     CornerRadius="8"
                     BorderBrush="#404040"
                     BorderThickness="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
             <DataGrid ItemsSource="{Binding Tables}"
                      SelectedItem="{Binding SelectedTable}"
                      AutoGenerateColumns="False"
@@ -133,28 +176,30 @@
                      RowHeight="60"
                      FontSize="14"
                      BorderThickness="0"
-                     Background="Transparent">
+                     Background="Transparent"
+                     MaxHeight="600">
                 
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#F5F5F5"/>
-                        <Setter Property="Foreground" Value="#333"/>
+                        <Setter Property="Background" Value="#505050"/>
+                        <Setter Property="Foreground" Value="White"/>
                         <Setter Property="FontWeight" Value="SemiBold"/>
                         <Setter Property="FontSize" Value="13"/>
                         <Setter Property="Padding" Value="16,12"/>
                         <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                        <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                        <Setter Property="BorderBrush" Value="#666666"/>
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
                 
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
-                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Background" Value="#404040"/>
+                        <Setter Property="Foreground" Value="White"/>
                         <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                        <Setter Property="BorderBrush" Value="#F0F0F0"/>
+                        <Setter Property="BorderBrush" Value="#555555"/>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#F9F9F9"/>
+                                <Setter Property="Background" Value="#505050"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -273,6 +318,7 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
+            </ScrollViewer>
         </Border>
     </Grid>
 </UserControl>

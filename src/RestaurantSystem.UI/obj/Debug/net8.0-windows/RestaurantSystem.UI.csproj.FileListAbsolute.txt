@@ -200,3 +200,9 @@ C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application
 C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\ReservationsView.baml
 C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\TableEditDialog.baml
 C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\TableEditDialog.g.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\DishEditDialog.baml
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\OrderEditDialog.baml
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\ReservationEditDialog.baml
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\DishEditDialog.g.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\OrderEditDialog.g.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Views\ReservationEditDialog.g.cs
