@@ -8,72 +8,143 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
     
-    <Grid Margin="16">
+    <Grid Margin="0" Background="#F5F5F5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <DockPanel Grid.Row="0" Margin="0,0,0,16">
-            <TextBlock Text="Menu Management" 
-                       Style="{StaticResource H1}"
-                       DockPanel.Dock="Left"/>
-            
-            <StackPanel Orientation="Horizontal" 
-                       DockPanel.Dock="Right"
-                       HorizontalAlignment="Right">
-                <Button Content="ADD DISH" 
-                        Style="{StaticResource PrimaryButton}"
-                        Margin="0,0,8,0"/>
-                <Button Content="REFRESH"
-                        Style="{StaticResource SecondaryButton}"/>
-            </StackPanel>
-        </DockPanel>
+        <Border Grid.Row="0" 
+                Background="White"
+                Padding="24"
+                BorderBrush="#E0E0E0"
+                BorderThickness="0,0,0,1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="0" Margin="0,0,0,20">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Menu Management" 
+                                 FontSize="28"
+                                 FontWeight="SemiBold"/>
+                        <TextBlock Text="Manage dishes and menu items"
+                                 FontSize="14"
+                                 Foreground="#666"
+                                 Margin="0,6,0,0"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" 
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center">
+                        <Button Content="ADD DISH" 
+                                Command="{Binding AddDishCommand}"
+                                Height="42"
+                                Padding="24,0"
+                                FontWeight="SemiBold"
+                                FontSize="13"
+                                Margin="0,0,12,0"
+                                Background="#673AB7"
+                                Foreground="White"
+                                BorderThickness="0"
+                                Cursor="Hand"/>
+                        <Button Content="↻" 
+                                Command="{Binding RefreshCommand}"
+                                Height="42"
+                                Width="42"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Background="White"
+                                Foreground="#673AB7"
+                                BorderBrush="#E0E0E0"
+                                BorderThickness="1"
+                                Cursor="Hand"/>
+                    </StackPanel>
+                </Grid>
+                
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                             Width="350"
+                             Height="42"
+                             Padding="14,0"
+                             VerticalContentAlignment="Center"
+                             FontSize="14"
+                             BorderBrush="#E0E0E0"
+                             BorderThickness="1"
+                             materialDesign:HintAssist.Hint="Search dishes..."/>
+                    
+                    <Button Content="SEARCH"
+                            Command="{Binding SearchCommand}"
+                            Height="42"
+                            Padding="24,0"
+                            Margin="12,0,0,0"
+                            Background="#673AB7"
+                            Foreground="White"
+                            BorderThickness="0"
+                            FontWeight="SemiBold"
+                            FontSize="13"
+                            Cursor="Hand"/>
+                </StackPanel>
+            </Grid>
+        </Border>
 
-        <!-- Filter Panel -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,16">
-            <TextBox materialDesign:HintAssist.Hint="Search dishes..."
-                     Width="200"
-                     Margin="0,0,8,0"/>
-            
-            <Button Content="SEARCH"
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    Margin="0,0,8,0"/>
-
-            <ComboBox materialDesign:HintAssist.Hint="Filter by category"
-                     Width="150"
-                     Margin="0,0,8,0"/>
-        </StackPanel>
-
-        <!-- Dishes List -->
-        <materialDesign:Card Grid.Row="2">
-            <DataGrid AutoGenerateColumns="False"
-                     CanUserAddRows="False">
+        <!-- Menu Grid -->
+        <Border Grid.Row="1"
+                Background="White"
+                Margin="24"
+                CornerRadius="8"
+                BorderBrush="#E0E0E0"
+                BorderThickness="1">
+            <DataGrid ItemsSource="{Binding Dishes}"
+                     SelectedItem="{Binding SelectedDish}"
+                     AutoGenerateColumns="False"
+                     CanUserAddRows="False"
+                     HeadersVisibility="All"
+                     GridLinesVisibility="None"
+                     IsReadOnly="True"
+                     RowHeight="60"
+                     FontSize="14"
+                     BorderThickness="0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
-                    <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="Auto"/>
-                    <DataGridTextColumn Header="Price" Binding="{Binding Price, StringFormat='{}{0:C}'}" Width="Auto"/>
-                    <DataGridTextColumn Header="Cooking Time" Binding="{Binding CookingTimeMinutes}" Width="Auto"/>
-                    <DataGridCheckBoxColumn Header="Available" Binding="{Binding IsAvailable}" Width="Auto"/>
-                    <DataGridTemplateColumn Header="Actions" Width="Auto">
+                    <DataGridTextColumn Header="Dish Name" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="150"/>
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price, StringFormat='${0:F2}'}" Width="100"/>
+                    <DataGridTextColumn Header="Cooking Time" Binding="{Binding CookingTimeMinutes, StringFormat='{}{0} min'}" Width="120"/>
+                    <DataGridCheckBoxColumn Header="Available" Binding="{Binding IsAvailable, Mode=OneWay}" Width="100"/>
+                    <DataGridTemplateColumn Header="Actions" Width="180">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <Button Content="Edit"
-                                           Style="{StaticResource MaterialDesignFlatButton}"
-                                           Margin="4,0"/>
+                                           Command="{Binding DataContext.EditDishCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                           Height="32"
+                                           Padding="12,0"
+                                           Margin="0,0,8,0"
+                                           Background="Transparent"
+                                           Foreground="#673AB7"
+                                           BorderBrush="#673AB7"
+                                           BorderThickness="1"
+                                           FontSize="12"
+                                           Cursor="Hand"/>
                                     <Button Content="Delete"
-                                           Style="{StaticResource MaterialDesignFlatButton}"
-                                           Margin="4,0"/>
+                                           Command="{Binding DataContext.DeleteDishCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                           Height="32"
+                                           Padding="12,0"
+                                           Background="Transparent"
+                                           Foreground="#F44336"
+                                           BorderBrush="#F44336"
+                                           BorderThickness="1"
+                                           FontSize="12"
+                                           Cursor="Hand"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-        </materialDesign:Card>
+        </Border>
     </Grid>
 </UserControl>
-

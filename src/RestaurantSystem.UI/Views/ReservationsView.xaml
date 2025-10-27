@@ -8,225 +8,130 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
     
-    <Grid>
+    <Grid Margin="0" Background="#F5F5F5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Header Section -->
-        <materialDesign:Card Grid.Row="0" 
-                           Margin="0,0,0,16"
-                           UniformCornerRadius="12"
-                           materialDesign:ElevationAssist.Elevation="Dp2"
-                           Padding="24,20">
-            <DockPanel>
-                <StackPanel DockPanel.Dock="Left">
-                    <TextBlock Text="Reservations" 
-                             FontSize="28"
-                             FontWeight="SemiBold"
-                             Margin="0,0,0,4"/>
-                    <TextBlock Text="Manage table reservations and bookings"
-                             Style="{StaticResource Caption}"
-                             Foreground="{StaticResource TextSecondaryBrush}"/>
-                </StackPanel>
+        <!-- Header -->
+        <Border Grid.Row="0" 
+                Background="White"
+                Padding="24"
+                BorderBrush="#E0E0E0"
+                BorderThickness="0,0,0,1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
                 
-                <StackPanel Orientation="Horizontal" 
-                           DockPanel.Dock="Right"
-                           HorizontalAlignment="Right"
-                           VerticalAlignment="Center">
-                    <Button Style="{StaticResource MaterialDesignRaisedButton}"
-                            Command="{Binding AddReservationCommand}"
-                            Height="40"
-                            Padding="16,0"
-                            Margin="0,0,12,0">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Plus" 
-                                                   Width="20" 
-                                                   Height="20"
-                                                   VerticalAlignment="Center"
-                                                   Margin="0,0,8,0"/>
-                            <TextBlock Text="NEW RESERVATION" 
-                                     VerticalAlignment="Center"
-                                     FontWeight="Medium"/>
-                        </StackPanel>
-                    </Button>
+                <Grid Grid.Row="0" Margin="0,0,0,20">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Reservations" 
+                                 FontSize="28"
+                                 FontWeight="SemiBold"/>
+                        <TextBlock Text="Manage table reservations"
+                                 FontSize="14"
+                                 Foreground="#666"
+                                 Margin="0,6,0,0"/>
+                    </StackPanel>
                     
-                    <Button Style="{StaticResource MaterialDesignOutlinedButton}"
-                            Command="{Binding RefreshCommand}"
-                            Height="40"
-                            Padding="12,0"
-                            ToolTip="Refresh">
-                        <materialDesign:PackIcon Kind="Refresh" 
-                                               Width="20" 
-                                               Height="20"/>
-                    </Button>
+                    <StackPanel Orientation="Horizontal" 
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center">
+                        <Button Content="NEW RESERVATION" 
+                                Command="{Binding AddReservationCommand}"
+                                Height="42"
+                                Padding="24,0"
+                                FontWeight="SemiBold"
+                                FontSize="13"
+                                Margin="0,0,12,0"
+                                Background="#673AB7"
+                                Foreground="White"
+                                BorderThickness="0"
+                                Cursor="Hand"/>
+                        <Button Content="↻" 
+                                Command="{Binding RefreshCommand}"
+                                Height="42"
+                                Width="42"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Background="White"
+                                Foreground="#673AB7"
+                                BorderBrush="#E0E0E0"
+                                BorderThickness="1"
+                                Cursor="Hand"/>
+                    </StackPanel>
+                </Grid>
+                
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <DatePicker SelectedDate="{Binding SelectedDate}"
+                               Width="200"
+                               Height="42"
+                               VerticalContentAlignment="Center"
+                               FontSize="14"
+                               BorderBrush="#E0E0E0"
+                               BorderThickness="1"
+                               materialDesign:HintAssist.Hint="Select Date"/>
                 </StackPanel>
-            </DockPanel>
-        </materialDesign:Card>
-
-        <!-- Filter Panel -->
-        <materialDesign:Card Grid.Row="1" 
-                           Margin="0,0,0,16"
-                           UniformCornerRadius="12"
-                           materialDesign:ElevationAssist.Elevation="Dp1"
-                           Padding="20,16">
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="Filter" 
-                                       Width="20" 
-                                       Height="20"
-                                       VerticalAlignment="Center"
-                                       Margin="0,0,12,0"
-                                       Foreground="{StaticResource PrimaryBrush}"/>
-                
-                <DatePicker materialDesign:HintAssist.Hint="Select date"
-                           SelectedDate="{Binding SelectedDate}"
-                           Width="200"
-                           Margin="0,0,16,0"
-                           Style="{StaticResource MaterialDesignOutlinedDatePicker}"/>
-                
-                <ComboBox materialDesign:HintAssist.Hint="Filter by status"
-                         Width="180"
-                         Style="{StaticResource MaterialDesignOutlinedComboBox}"/>
-            </StackPanel>
-        </materialDesign:Card>
+            </Grid>
+        </Border>
 
         <!-- Reservations Grid -->
-        <materialDesign:Card Grid.Row="2"
-                           UniformCornerRadius="12"
-                           materialDesign:ElevationAssist.Elevation="Dp2">
+        <Border Grid.Row="1"
+                Background="White"
+                Margin="24"
+                CornerRadius="8"
+                BorderBrush="#E0E0E0"
+                BorderThickness="1">
             <DataGrid ItemsSource="{Binding Reservations}"
                      SelectedItem="{Binding SelectedReservation}"
                      AutoGenerateColumns="False"
                      CanUserAddRows="False"
-                     CanUserDeleteRows="False"
+                     HeadersVisibility="All"
+                     GridLinesVisibility="None"
                      IsReadOnly="True"
-                     RowHeight="56"
+                     RowHeight="60"
                      FontSize="14"
-                     materialDesign:DataGridAssist.CellPadding="16,12"
-                     materialDesign:DataGridAssist.ColumnHeaderPadding="16,12">
+                     BorderThickness="0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Client Name" 
-                                      Binding="{Binding ClientName}" 
-                                      Width="*"
-                                      FontWeight="Medium"/>
-                    
-                    <DataGridTemplateColumn Header="Phone" Width="Auto">
+                    <DataGridTextColumn Header="Client Name" Binding="{Binding ClientName}" Width="*"/>
+                    <DataGridTextColumn Header="Phone" Binding="{Binding ClientPhone}" Width="*"/>
+                    <DataGridTextColumn Header="Table" Binding="{Binding TableName}" Width="150"/>
+                    <DataGridTextColumn Header="Time" Binding="{Binding StartTime, StringFormat='HH:mm'}" Width="100"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="120"/>
+                    <DataGridTemplateColumn Header="Actions" Width="180">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="Phone" 
-                                                           Width="16" 
-                                                           Height="16"
-                                                           VerticalAlignment="Center"
-                                                           Margin="0,0,6,0"
-                                                           Foreground="{StaticResource TextSecondaryBrush}"/>
-                                    <TextBlock Text="{Binding ClientPhone}" 
-                                             VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    
-                    <DataGridTemplateColumn Header="Table" Width="Auto">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="TableFurniture" 
-                                                           Width="16" 
-                                                           Height="16"
-                                                           VerticalAlignment="Center"
-                                                           Margin="0,0,6,0"
-                                                           Foreground="{StaticResource TextSecondaryBrush}"/>
-                                    <TextBlock Text="{Binding TableName}" 
-                                             VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    
-                    <DataGridTextColumn Header="Start Time" 
-                                      Binding="{Binding StartTime, StringFormat='{}{0:MMM dd, yyyy HH:mm}'}" 
-                                      Width="Auto"/>
-                    
-                    <DataGridTextColumn Header="End Time" 
-                                      Binding="{Binding EndTime, StringFormat='{}{0:HH:mm}'}" 
-                                      Width="Auto"/>
-                    
-                    <DataGridTemplateColumn Header="Status" Width="Auto">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Border CornerRadius="12" 
-                                       Padding="12,6"
-                                       HorizontalAlignment="Left">
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Status}" Value="Pending">
-                                                    <Setter Property="Background" Value="#FFF3E0"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Status}" Value="Confirmed">
-                                                    <Setter Property="Background" Value="#E8F5E9"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Status}" Value="Cancelled">
-                                                    <Setter Property="Background" Value="#FFEBEE"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Status}" Value="Completed">
-                                                    <Setter Property="Background" Value="#E0E0E0"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Border.Style>
-                                    <TextBlock FontWeight="Medium" FontSize="12">
-                                        <TextBlock.Style>
-                                            <Style TargetType="TextBlock">
-                                                <Setter Property="Text" Value="{Binding Status}"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Status}" Value="Pending">
-                                                        <Setter Property="Foreground" Value="#EF6C00"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Status}" Value="Confirmed">
-                                                        <Setter Property="Foreground" Value="#2E7D32"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Status}" Value="Cancelled">
-                                                        <Setter Property="Foreground" Value="#C62828"/>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Status}" Value="Completed">
-                                                        <Setter Property="Foreground" Value="#616161"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBlock.Style>
-                                    </TextBlock>
-                                </Border>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    
-                    <DataGridTemplateColumn Header="Actions" Width="Auto">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Style="{StaticResource MaterialDesignIconButton}"
+                                    <Button Content="Edit"
                                            Command="{Binding DataContext.EditReservationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                           ToolTip="Edit"
-                                           Margin="4,0">
-                                        <materialDesign:PackIcon Kind="Pencil" Width="18" Height="18"/>
-                                    </Button>
-                                    <Button Style="{StaticResource MaterialDesignIconButton}"
+                                           Height="32"
+                                           Padding="12,0"
+                                           Margin="0,0,8,0"
+                                           Background="Transparent"
+                                           Foreground="#673AB7"
+                                           BorderBrush="#673AB7"
+                                           BorderThickness="1"
+                                           FontSize="12"
+                                           Cursor="Hand"/>
+                                    <Button Content="Cancel"
                                            Command="{Binding DataContext.CancelReservationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                           ToolTip="Cancel"
+                                           Height="32"
+                                           Padding="12,0"
+                                           Background="Transparent"
                                            Foreground="#F44336"
-                                           Margin="4,0">
-                                        <materialDesign:PackIcon Kind="Close" Width="18" Height="18"/>
-                                    </Button>
+                                           BorderBrush="#F44336"
+                                           BorderThickness="1"
+                                           FontSize="12"
+                                           Cursor="Hand"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-        </materialDesign:Card>
+        </Border>
     </Grid>
 </UserControl>
