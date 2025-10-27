@@ -35,9 +35,9 @@
 
         <!-- App Bar -->
         <materialDesign:ColorZone Mode="PrimaryMid" 
-         Padding="16"
-   materialDesign:ShadowAssist.ShadowDepth="Depth2"
-  Grid.Row="0">
+                                  Padding="16"
+                                  materialDesign:ElevationAssist.Elevation="Dp2"
+                                  Grid.Row="0">
   <DockPanel>
         <StackPanel Orientation="Horizontal"
      DockPanel.Dock="Left">
@@ -73,11 +73,11 @@
          </Grid.ColumnDefinitions>
 
    <!-- Navigation Menu -->
- <materialDesign:Card Grid.Column="0" 
-     Margin="16"
-      UniformCornerRadius="8"
-              Background="{StaticResource SurfaceLightBrush}"
-    materialDesign:ShadowAssist.ShadowDepth="Depth1">
+            <materialDesign:Card Grid.Column="0" 
+                             Margin="16"
+                             UniformCornerRadius="8"
+                             Background="{StaticResource SurfaceLightBrush}"
+                             materialDesign:ElevationAssist.Elevation="Dp1">
                 <ListBox Style="{StaticResource DefaultListBox}"
     Width="200">
       <ListBoxItem>
@@ -114,11 +114,11 @@
     </materialDesign:Card>
 
             <!-- Content Area -->
-<materialDesign:Card Grid.Column="1"
-   Margin="0 16 16 16"
-        UniformCornerRadius="8"
-           Background="{StaticResource SurfaceLightBrush}"
-       materialDesign:ShadowAssist.ShadowDepth="Depth1">
+            <materialDesign:Card Grid.Column="1"
+                             Margin="0 16 16 16"
+                             UniformCornerRadius="8"
+                             Background="{StaticResource SurfaceLightBrush}"
+                             materialDesign:ElevationAssist.Elevation="Dp1">
          <ContentControl Content="{Binding CurrentView}"/>
  </materialDesign:Card>
         </Grid>

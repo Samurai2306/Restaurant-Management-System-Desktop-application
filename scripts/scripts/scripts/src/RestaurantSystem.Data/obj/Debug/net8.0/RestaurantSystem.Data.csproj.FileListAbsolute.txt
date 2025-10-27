@@ -1,0 +1,6 @@
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\scripts\scripts\scripts\src\RestaurantSystem.Data\obj\Debug\net8.0\RestaurantSystem.Data.csproj.AssemblyReference.cache
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\scripts\scripts\scripts\src\RestaurantSystem.Data\obj\Debug\net8.0\RestaurantSystem.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\scripts\scripts\scripts\src\RestaurantSystem.Data\obj\Debug\net8.0\RestaurantSystem.Data.AssemblyInfoInputs.cache
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\scripts\scripts\scripts\src\RestaurantSystem.Data\obj\Debug\net8.0\RestaurantSystem.Data.AssemblyInfo.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\scripts\scripts\scripts\src\RestaurantSystem.Data\obj\Debug\net8.0\RestaurantSystem.Data.csproj.CoreCompileInputs.cache
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\scripts\scripts\scripts\src\RestaurantSystem.Data\obj\Debug\net8.0\RestaurantSystem.Data.sourcelink.json

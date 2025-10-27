@@ -1,0 +1,8 @@
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\scripts\scripts\scripts\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\RestaurantSystem.UI.csproj.AssemblyReference.cache
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\scripts\scripts\scripts\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Resources\Colors.baml
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\scripts\scripts\scripts\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\Resources\Styles.baml
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\scripts\scripts\scripts\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\scripts\scripts\scripts\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\App.g.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\scripts\scripts\scripts\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\RestaurantSystem.UI_Content.g.cs
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\scripts\scripts\scripts\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\RestaurantSystem.UI_MarkupCompile.cache
+C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\scripts\scripts\scripts\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\RestaurantSystem.UI_MarkupCompile.lref

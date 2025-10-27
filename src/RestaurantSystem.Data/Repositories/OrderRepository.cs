@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RestaurantSystem.Core.Common;
+using RestaurantSystem.Core.Enums;
 using RestaurantSystem.Core.Interfaces.Repositories;
 using RestaurantSystem.Core.Models;
 using RestaurantSystem.Data.Context;

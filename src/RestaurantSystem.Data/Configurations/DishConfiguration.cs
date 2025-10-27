@@ -23,27 +23,35 @@ public class DishConfiguration : IEntityTypeConfiguration<Dish>
     .IsRequired()
     .HasPrecision(10, 2);
 
-  builder.Property(d => d.Category)
-      .IsRequired();
+        builder.Property(d => d.Category)
+            .IsRequired()
+            .HasConversion<string>();
 
         builder.Property(d => d.CookingTimeMinutes)
-   .IsRequired();
+            .IsRequired();
 
         builder.Property(d => d.IsAvailable)
-   .IsRequired()
-        .HasDefaultValue(true);
+            .IsRequired()
+            .HasDefaultValue(true);
 
         builder.Property(d => d.ImagePath)
-  .HasMaxLength(255);
+            .HasMaxLength(255);
 
         builder.Property(d => d.Tags)
-      .HasMaxLength(500);
+            .HasMaxLength(500);
+
+        builder.Property(d => d.Allergens)
+            .HasConversion<string>();
 
         builder.Property(d => d.CreatedAt)
-   .IsRequired();
+            .IsRequired();
 
         builder.Property(d => d.UpdatedAt)
-  .IsRequired();
+            .IsRequired();
+
+        builder.Property(d => d.IsDeleted)
+            .IsRequired()
+            .HasDefaultValue(false);
 
         // Relationships
         builder.HasMany(d => d.OrderItems)
@@ -51,9 +59,11 @@ public class DishConfiguration : IEntityTypeConfiguration<Dish>
  .HasForeignKey(oi => oi.DishId)
         .OnDelete(DeleteBehavior.Restrict);
 
-    // Indexes
+        // Indexes
         builder.HasIndex(d => d.Name);
         builder.HasIndex(d => d.Category);
         builder.HasIndex(d => d.IsAvailable);
+        builder.HasIndex(d => d.IsDeleted);
+        builder.HasIndex(d => new { d.Category, d.IsAvailable });
     }
 }

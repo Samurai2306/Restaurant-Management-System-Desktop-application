@@ -5,11 +5,11 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
     <!-- Card Styles -->
     <Style x:Key="ModuleCard" TargetType="materialDesign:Card" BasedOn="{StaticResource MaterialDesignCard}">
-      <Setter Property="Margin" Value="16"/>
+        <Setter Property="Margin" Value="16"/>
         <Setter Property="Padding" Value="16"/>
-        <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth1"/>
+        <Setter Property="materialDesign:ElevationAssist.Elevation" Value="Dp1"/>
         <Setter Property="UniformCornerRadius" Value="8"/>
-     <Setter Property="Background" Value="{StaticResource SurfaceLightBrush}"/>
+        <Setter Property="Background" Value="{StaticResource SurfaceLightBrush}"/>
     </Style>
 
     <!-- Header Styles -->

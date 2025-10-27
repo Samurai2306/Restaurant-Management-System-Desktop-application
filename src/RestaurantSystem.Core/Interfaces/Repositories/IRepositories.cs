@@ -1,5 +1,6 @@
 using RestaurantSystem.Core.Common;
 using RestaurantSystem.Core.Models;
+using RestaurantSystem.Core.Enums;
 
 namespace RestaurantSystem.Core.Interfaces.Repositories;
 
@@ -19,7 +20,7 @@ public interface IReservationRepository : IRepository<Reservation>
 
 public interface IDishRepository : IRepository<Dish>
 {
-  Task<Result<IEnumerable<Dish>>> GetDishesByCategoryAsync(DishCategory category);
+    Task<Result<IEnumerable<Dish>>> GetDishesByCategoryAsync(DishCategory category);
     Task<Result<IEnumerable<Dish>>> GetAvailableDishesAsync();
     Task<Result<IEnumerable<Dish>>> SearchDishesAsync(string searchTerm);
 }

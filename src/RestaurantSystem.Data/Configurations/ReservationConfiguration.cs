@@ -29,14 +29,20 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
    builder.Property(r => r.Comment)
          .HasMaxLength(500);
 
-     builder.Property(r => r.Status)
-    .IsRequired();
+        builder.Property(r => r.Status)
+            .IsRequired()
+            .HasConversion<string>()
+            .HasDefaultValue(RestaurantSystem.Core.Enums.ReservationStatus.Pending);
 
-     builder.Property(r => r.CreatedAt)
-  .IsRequired();
+        builder.Property(r => r.CreatedAt)
+            .IsRequired();
 
         builder.Property(r => r.UpdatedAt)
-      .IsRequired();
+            .IsRequired();
+
+        builder.Property(r => r.IsDeleted)
+            .IsRequired()
+            .HasDefaultValue(false);
 
         // Relationships
         builder.HasOne(r => r.Table)
@@ -44,9 +50,12 @@ public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
   .HasForeignKey(r => r.TableId)
         .OnDelete(DeleteBehavior.Restrict);
 
-     // Indexes
-   builder.HasIndex(r => r.ClientPhone);
+        // Indexes
+        builder.HasIndex(r => r.ClientPhone);
         builder.HasIndex(r => r.StartTime);
         builder.HasIndex(r => r.Status);
+        builder.HasIndex(r => r.TableId);
+        builder.HasIndex(r => r.IsDeleted);
+        builder.HasIndex(r => new { r.TableId, r.StartTime, r.EndTime });
     }
 }

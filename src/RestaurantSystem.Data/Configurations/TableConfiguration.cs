@@ -17,20 +17,25 @@ public class TableConfiguration : IEntityTypeConfiguration<Table>
             .HasMaxLength(50);
 
         builder.Property(t => t.Location)
-          .IsRequired();
+            .IsRequired()
+            .HasConversion<string>();
 
         builder.Property(t => t.SeatsCount)
-      .IsRequired();
+            .IsRequired();
 
         builder.Property(t => t.IsActive)
-    .IsRequired()
-        .HasDefaultValue(true);
+            .IsRequired()
+            .HasDefaultValue(true);
 
         builder.Property(t => t.CreatedAt)
-       .IsRequired();
+            .IsRequired();
 
-    builder.Property(t => t.UpdatedAt)
-     .IsRequired();
+        builder.Property(t => t.UpdatedAt)
+            .IsRequired();
+
+        builder.Property(t => t.IsDeleted)
+            .IsRequired()
+            .HasDefaultValue(false);
 
      // Relationships
         builder.HasMany(t => t.Reservations)
@@ -46,5 +51,7 @@ public class TableConfiguration : IEntityTypeConfiguration<Table>
         // Indexes
         builder.HasIndex(t => t.Name).IsUnique();
         builder.HasIndex(t => t.Location);
+        builder.HasIndex(t => t.IsActive);
+        builder.HasIndex(t => t.IsDeleted);
     }
 }

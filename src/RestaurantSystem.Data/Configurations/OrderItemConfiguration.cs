@@ -22,16 +22,24 @@ public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
     builder.Property(oi => oi.SpecialInstructions)
  .HasMaxLength(500);
 
- builder.Property(oi => oi.Status)
-  .IsRequired();
+        builder.Property(oi => oi.Status)
+            .IsRequired()
+            .HasConversion<string>();
 
         builder.Property(oi => oi.CreatedAt)
-         .IsRequired();
+            .IsRequired();
 
         builder.Property(oi => oi.UpdatedAt)
-        .IsRequired();
+            .IsRequired();
 
-    // Relationships
+        builder.Property(oi => oi.IsDeleted)
+            .IsRequired()
+            .HasDefaultValue(false);
+
+        // Ignore calculated property
+        builder.Ignore(oi => oi.TotalPrice);
+
+        // Relationships
         builder.HasOne(oi => oi.Order)
        .WithMany(o => o.Items)
        .HasForeignKey(oi => oi.OrderId)
@@ -44,6 +52,9 @@ public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
 
         // Indexes
         builder.HasIndex(oi => oi.Status);
+        builder.HasIndex(oi => oi.OrderId);
+        builder.HasIndex(oi => oi.DishId);
+        builder.HasIndex(oi => oi.IsDeleted);
         builder.HasIndex(oi => new { oi.OrderId, oi.DishId });
     }
 }

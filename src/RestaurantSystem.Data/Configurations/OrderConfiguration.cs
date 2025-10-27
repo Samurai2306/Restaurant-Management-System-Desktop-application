@@ -21,16 +21,25 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             .HasMaxLength(500);
 
         builder.Property(o => o.Status)
-      .IsRequired();
+            .IsRequired()
+            .HasConversion<string>();
 
         builder.Property(o => o.WaiterId)
             .HasMaxLength(50);
 
         builder.Property(o => o.CreatedAt)
-         .IsRequired();
+            .IsRequired();
 
         builder.Property(o => o.UpdatedAt)
-         .IsRequired();
+            .IsRequired();
+
+        builder.Property(o => o.IsDeleted)
+            .IsRequired()
+            .HasDefaultValue(false);
+
+        // Ignore calculated property
+        builder.Ignore(o => o.TotalAmount);
+        builder.Ignore(o => o.EstimatedWaitingTime);
 
         // Relationships
         builder.HasOne(o => o.Table)
@@ -43,9 +52,11 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
      .HasForeignKey(oi => oi.OrderId)
   .OnDelete(DeleteBehavior.Cascade);
 
-      // Indexes
+        // Indexes
         builder.HasIndex(o => o.CreatedTime);
         builder.HasIndex(o => o.Status);
         builder.HasIndex(o => o.WaiterId);
+        builder.HasIndex(o => o.TableId);
+        builder.HasIndex(o => o.IsDeleted);
     }
 }

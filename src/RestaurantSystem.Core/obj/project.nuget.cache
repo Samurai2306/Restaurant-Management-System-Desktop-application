@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "KgV7ROxvptU=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Gleb\\Documents\\GitHub\\-Restaurant-Management-System-Desktop-application\\src\\RestaurantSystem.Core\\RestaurantSystem.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Gleb\\.nuget\\packages\\communitytoolkit.mvvm\\8.4.0\\communitytoolkit.mvvm.8.4.0.nupkg.sha512",
+    "C:\\Users\\Gleb\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512"
+  ],
+  "logs": []
+}
