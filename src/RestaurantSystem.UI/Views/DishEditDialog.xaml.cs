@@ -33,7 +33,7 @@ public partial class DishEditDialog : Window
         Price = dish.Price;
         CookingTime = dish.CookingTimeMinutes;
         IsAvailable = dish.IsAvailable;
-        
+
         // Set fields after loading
         Loaded += (s, e) =>
         {
@@ -42,7 +42,7 @@ public partial class DishEditDialog : Window
             PriceTextBox.Text = Price.ToString("F2");
             CookingTimeTextBox.Text = CookingTime.ToString();
             IsAvailableCheckBox.IsChecked = IsAvailable;
-            
+
             // Select category
             var catItem = CategoryComboBox.Items.OfType<ComboBoxItem>()
                 .FirstOrDefault(i => i.Tag?.ToString() == Category.ToString());
@@ -83,7 +83,7 @@ public partial class DishEditDialog : Window
 
         if (!IsValidPrice(PriceTextBox.Text, out var price))
         {
-            MessageBox.Show("Please enter a valid price between $0.01 and $10,000.", 
+            MessageBox.Show("Please enter a valid price between $0.01 and $10,000.",
                 "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             PriceTextBox.Focus();
             return;
@@ -91,7 +91,7 @@ public partial class DishEditDialog : Window
 
         if (!IsValidCookingTime(CookingTimeTextBox.Text, out var cookingTime))
         {
-            MessageBox.Show("Please enter a valid cooking time between 1 and 180 minutes.", 
+            MessageBox.Show("Please enter a valid cooking time between 1 and 180 minutes.",
                 "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             CookingTimeTextBox.Focus();
             return;
@@ -103,13 +103,13 @@ public partial class DishEditDialog : Window
         Price = price;
         CookingTime = cookingTime;
         IsAvailable = IsAvailableCheckBox.IsChecked ?? true;
-        
-        if (CategoryComboBox.SelectedItem is ComboBoxItem catItem && 
+
+        if (CategoryComboBox.SelectedItem is ComboBoxItem catItem &&
             Enum.TryParse<DishCategory>(catItem.Tag?.ToString(), out var category))
         {
             Category = category;
         }
-        
+
         DialogResult = true;
         Close();
     }
@@ -139,5 +139,13 @@ public partial class DishEditDialog : Window
         }
 
         return dish;
+    }
+
+    private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
+        {
+            try { DragMove(); } catch { }
+        }
     }
 }

@@ -5,7 +5,8 @@
         Title="Order Details" Height="600" Width="900"
         Background="#1E1E1E"
         WindowStartupLocation="CenterOwner"
-        ResizeMode="CanResize">
+        ResizeMode="CanResize"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
     
     <Grid Margin="0">
         <!-- Header -->

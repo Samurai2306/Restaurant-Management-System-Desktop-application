@@ -19,10 +19,10 @@ public partial class OrderItemEditDialog : Window
     public OrderItemEditDialog(int orderId, System.Collections.Generic.List<Dish> dishes)
     {
         InitializeComponent();
-        
+
         OrderId = orderId;
         _dishes = dishes;
-        
+
         // Populate dish combo box
         DishComboBox.ItemsSource = dishes;
         if (dishes.Any()) DishComboBox.SelectedIndex = 0;
@@ -75,7 +75,7 @@ public partial class OrderItemEditDialog : Window
     public OrderItem GetOrderItem()
     {
         var dish = _dishes.FirstOrDefault(d => d.Id == SelectedDishId);
-        
+
         return new OrderItem
         {
             OrderId = OrderId,
@@ -85,6 +85,14 @@ public partial class OrderItemEditDialog : Window
             SpecialInstructions = SpecialInstructions,
             Status = OrderStatus.New
         };
+    }
+
+    private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
+        {
+            try { DragMove(); } catch { }
+        }
     }
 }
 

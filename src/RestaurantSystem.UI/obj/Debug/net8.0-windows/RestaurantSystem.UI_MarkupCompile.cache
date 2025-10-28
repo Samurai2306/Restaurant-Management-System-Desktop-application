@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\
+C:\Users\Redmi\Documents\GitHub\Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\obj\Debug\net8.0-windows\
 RestaurantSystem.UI
 none
 false
-TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
-C:\Users\Gleb\Documents\GitHub\-Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\App.xaml
+TRACE;DEBUG;NET;NET8_0;NETCOREAPP
+C:\Users\Redmi\Documents\GitHub\Restaurant-Management-System-Desktop-application\src\RestaurantSystem.UI\App.xaml
 19510081858
-22-1658342261
+221119803820
 40429675423
-246-1915147518
+2461010338770
 MainWindow.xaml;Resources\Colors.xaml;Resources\ModuleStyles.xaml;Resources\Styles.xaml;Views\AnalyticsView.xaml;Views\DashboardView.xaml;Views\DishEditDialog.xaml;Views\LoginWindow.xaml;Views\MenuView.xaml;Views\OrderDetailWindow.xaml;Views\OrderEditDialog.xaml;Views\OrderItemEditDialog.xaml;Views\OrdersView.xaml;Views\ProfileDialog.xaml;Views\ReservationEditDialog.xaml;Views\ReservationsView.xaml;Views\SettingsWindow.xaml;Views\TableEditDialog.xaml;Views\TablesView.xaml;
 
 False

@@ -16,20 +16,20 @@ public partial class OrderDetailWindow : Window
     private readonly IOrderRepository _orderRepository;
     private readonly IDishRepository _dishRepository;
     private readonly Services.IDialogService _dialogService;
-    
+
     private Order _order;
     private List<OrderItemViewModel> _items;
 
-    public OrderDetailWindow(Order order, IOrderRepository orderRepository, 
+    public OrderDetailWindow(Order order, IOrderRepository orderRepository,
                              IDishRepository dishRepository, IDialogService dialogService)
     {
         InitializeComponent();
-        
+
         _order = order;
         _orderRepository = orderRepository;
         _dishRepository = dishRepository;
         _dialogService = dialogService;
-        
+
         LoadOrderData();
     }
 
@@ -39,10 +39,10 @@ public partial class OrderDetailWindow : Window
         TotalAmountText.Text = $"{_order.TotalAmount:C}";
         StatusText.Text = _order.Status.ToString();
         TableText.Text = _order.Table?.Name ?? "Unknown";
-        InstructionsText.Text = string.IsNullOrWhiteSpace(_order.SpecialInstructions) 
-            ? "No special instructions" 
+        InstructionsText.Text = string.IsNullOrWhiteSpace(_order.SpecialInstructions)
+            ? "No special instructions"
             : _order.SpecialInstructions;
-        
+
         // Load items
         _items = _order.Items?.Select(item => new OrderItemViewModel
         {
@@ -55,7 +55,7 @@ public partial class OrderDetailWindow : Window
             SpecialInstructions = item.SpecialInstructions,
             Status = item.Status
         }).ToList() ?? new List<OrderItemViewModel>();
-        
+
         ItemsDataGrid.ItemsSource = _items;
     }
 
@@ -73,12 +73,12 @@ public partial class OrderDetailWindow : Window
 
             var dialog = new OrderItemEditDialog(_order.Id, dishesResult.Value.ToList());
             dialog.Owner = this;
-            
+
             var result = dialog.ShowDialog();
             if (result == true)
             {
                 var newItem = dialog.GetOrderItem();
-                
+
                 // Add to order (in real app would save to database)
                 var newViewModel = new OrderItemViewModel
                 {
@@ -91,10 +91,10 @@ public partial class OrderDetailWindow : Window
                     SpecialInstructions = newItem.SpecialInstructions,
                     Status = newItem.Status
                 };
-                
+
                 _items.Add(newViewModel);
                 ItemsDataGrid.Items.Refresh();
-                
+
                 MessageBox.Show("Item added successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
@@ -130,7 +130,7 @@ public partial class OrderDetailWindow : Window
             {
                 _order.Status = OrderStatus.Paid;
                 _order.ClosedTime = DateTime.Now;
-                
+
                 var updateResult = await _orderRepository.UpdateAsync(_order);
                 if (updateResult.Succeeded)
                 {
@@ -165,7 +165,7 @@ public partial class OrderDetailWindow : Window
             {
                 _order.Status = OrderStatus.Cancelled;
                 _order.ClosedTime = DateTime.Now;
-                
+
                 var updateResult = await _orderRepository.UpdateAsync(_order);
                 if (updateResult.Succeeded)
                 {
@@ -183,6 +183,14 @@ public partial class OrderDetailWindow : Window
             {
                 MessageBox.Show($"Error cancelling order: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+    }
+
+    private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
+        {
+            try { DragMove(); } catch { }
         }
     }
 }

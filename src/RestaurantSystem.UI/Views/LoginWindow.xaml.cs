@@ -18,10 +18,10 @@ public partial class LoginWindow : Window
     {
         InitializeComponent();
         _authService = authService;
-        
+
         // Pre-fill username for convenience
         UsernameTextBox.Text = "admin";
-        
+
         // Set focus on password
         Loaded += (s, e) => PasswordBox.Focus();
     }
@@ -41,7 +41,7 @@ public partial class LoginWindow : Window
     private void ToggleButton_Click(object sender, RoutedEventArgs e)
     {
         _isRegistrationMode = !_isRegistrationMode;
-        
+
         if (_isRegistrationMode)
         {
             // Switch to registration mode
@@ -53,13 +53,13 @@ public partial class LoginWindow : Window
             LastNameTextBox.Visibility = Visibility.Visible;
             PrimaryButton.Content = "РЕГИСТРАЦИЯ";
             ToggleButton.Content = "Уже есть аккаунт? Войти";
-            
+
             // Clear fields
             FirstNameTextBox.Clear();
             LastNameTextBox.Clear();
             UsernameTextBox.Clear();
             PasswordBox.Clear();
-            
+
             // Focus on first name
             FirstNameTextBox.Focus();
         }
@@ -74,17 +74,17 @@ public partial class LoginWindow : Window
             LastNameTextBox.Visibility = Visibility.Collapsed;
             PrimaryButton.Content = "ВОЙТИ";
             ToggleButton.Content = "Нет аккаунта? Зарегистрироваться";
-            
+
             // Clear fields
             FirstNameTextBox.Clear();
             LastNameTextBox.Clear();
             UsernameTextBox.Text = "admin";
             PasswordBox.Clear();
-            
+
             // Focus on password
             PasswordBox.Focus();
         }
-        
+
         // Clear any errors
         ErrorBorder.Visibility = Visibility.Collapsed;
         ErrorMessageTextBlock.Text = string.Empty;
@@ -116,12 +116,12 @@ public partial class LoginWindow : Window
 
         // Show loading state
         PrimaryButton.IsEnabled = false;
-            PrimaryButton.Content = "ВХОД...";
+        PrimaryButton.Content = "ВХОД...";
 
         try
         {
             var user = await _authService.LoginAsync(username, password);
-            
+
             if (user != null)
             {
                 LoggedInUser = user;
@@ -195,7 +195,7 @@ public partial class LoginWindow : Window
 
         // Show loading state
         PrimaryButton.IsEnabled = false;
-            PrimaryButton.Content = "РЕГИСТРАЦИЯ...";
+        PrimaryButton.Content = "РЕГИСТРАЦИЯ...";
 
         try
         {
@@ -277,5 +277,13 @@ public partial class LoginWindow : Window
     {
         ErrorMessageTextBlock.Text = message;
         ErrorBorder.Visibility = Visibility.Visible;
+    }
+
+    private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.ButtonState == MouseButtonState.Pressed)
+        {
+            try { DragMove(); } catch { }
+        }
     }
 }

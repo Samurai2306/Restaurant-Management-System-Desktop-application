@@ -6,7 +6,8 @@
         WindowStartupLocation="CenterScreen"
         Background="#1E1E1E"
         Foreground="White"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
     
     <Grid Margin="20">
         <Grid.RowDefinitions>

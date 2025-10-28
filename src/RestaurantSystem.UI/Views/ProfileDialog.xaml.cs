@@ -13,14 +13,14 @@ public partial class ProfileDialog : Window
     {
         InitializeComponent();
         _authService = authService;
-        
+
         LoadUserData();
     }
 
     private void LoadUserData()
     {
         _user = _authService.CurrentUser;
-        
+
         if (_user == null)
         {
             MessageBox.Show("No user logged in", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -67,7 +67,7 @@ public partial class ProfileDialog : Window
         _user.Phone = PhoneTextBox.Text;
 
         var result = await _authService.UpdateProfileAsync(_user);
-        
+
         if (result)
         {
             MessageBox.Show("Profile updated successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -107,7 +107,7 @@ public partial class ProfileDialog : Window
         }
 
         var result = await _authService.ChangePasswordAsync(_user.Id, oldPassword, newPassword);
-        
+
         if (result)
         {
             MessageBox.Show("Password changed successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -118,6 +118,14 @@ public partial class ProfileDialog : Window
         else
         {
             MessageBox.Show("Failed to change password. Please check your current password.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
+        {
+            try { DragMove(); } catch { }
         }
     }
 }

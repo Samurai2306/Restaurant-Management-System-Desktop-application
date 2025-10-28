@@ -5,7 +5,8 @@
         Title="Настройки" Height="850" Width="700"
         Background="#1E1E1E"
         WindowStartupLocation="CenterOwner"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
     
     <Grid Margin="0">
         <!-- Header -->

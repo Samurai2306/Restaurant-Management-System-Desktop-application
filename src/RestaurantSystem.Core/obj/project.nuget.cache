@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "KgV7ROxvptU=",
+  "dgSpecHash": "OFJD3pp/xVU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Gleb\\Documents\\GitHub\\-Restaurant-Management-System-Desktop-application\\src\\RestaurantSystem.Core\\RestaurantSystem.Core.csproj",
+  "projectFilePath": "C:\\Users\\Redmi\\Documents\\GitHub\\Restaurant-Management-System-Desktop-application\\src\\RestaurantSystem.Core\\RestaurantSystem.Core.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Gleb\\.nuget\\packages\\communitytoolkit.mvvm\\8.4.0\\communitytoolkit.mvvm.8.4.0.nupkg.sha512",
-    "C:\\Users\\Gleb\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512"
+    "C:\\Users\\Redmi\\.nuget\\packages\\communitytoolkit.mvvm\\8.4.0\\communitytoolkit.mvvm.8.4.0.nupkg.sha512",
+    "C:\\Users\\Redmi\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",
+    "C:\\Users\\Redmi\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.19\\microsoft.netcore.app.ref.8.0.19.nupkg.sha512",
+    "C:\\Users\\Redmi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.19\\microsoft.windowsdesktop.app.ref.8.0.19.nupkg.sha512",
+    "C:\\Users\\Redmi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.19\\microsoft.aspnetcore.app.ref.8.0.19.nupkg.sha512"
   ],
   "logs": []
 }

@@ -26,7 +26,7 @@ public partial class TableEditDialog : Window
         {
             InitializeComponent();
             DataContext = this;
-            
+
             // Set default selection after the component is initialized
             Loaded += (s, e) =>
             {
@@ -38,7 +38,7 @@ public partial class TableEditDialog : Window
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error initializing dialog: {ex.Message}\n\n{ex.StackTrace}", 
+            MessageBox.Show($"Error initializing dialog: {ex.Message}\n\n{ex.StackTrace}",
                 "Initialization Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
@@ -47,12 +47,12 @@ public partial class TableEditDialog : Window
     {
         try
         {
-        Title = "Edit Table";
-        TableId = table.Id;
-        TableName = table.Name;
-        Location = table.Location;
-        SeatsCount = table.SeatsCount;
-        IsTableActive = table.IsActive;
+            Title = "Edit Table";
+            TableId = table.Id;
+            TableName = table.Name;
+            Location = table.Location;
+            SeatsCount = table.SeatsCount;
+            IsTableActive = table.IsActive;
 
             // Set location combo box after loaded
             Loaded += (s, e) =>
@@ -79,7 +79,7 @@ public partial class TableEditDialog : Window
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error loading table data: {ex.Message}\n\n{ex.StackTrace}", 
+            MessageBox.Show($"Error loading table data: {ex.Message}\n\n{ex.StackTrace}",
                 "Load Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
@@ -89,7 +89,7 @@ public partial class TableEditDialog : Window
         // Validation
         if (string.IsNullOrWhiteSpace(TableName))
         {
-            MessageBox.Show("Please enter a table name.", "Validation Error", 
+            MessageBox.Show("Please enter a table name.", "Validation Error",
                 MessageBoxButton.OK, MessageBoxImage.Warning);
             NameTextBox.Focus();
             return;
@@ -97,7 +97,7 @@ public partial class TableEditDialog : Window
 
         if (SeatsCount < 1 || SeatsCount > 20)
         {
-            MessageBox.Show("Seats count must be between 1 and 20.", "Validation Error", 
+            MessageBox.Show("Seats count must be between 1 and 20.", "Validation Error",
                 MessageBoxButton.OK, MessageBoxImage.Warning);
             SeatsTextBox.Focus();
             return;
@@ -144,6 +144,14 @@ public partial class TableEditDialog : Window
         }
 
         return table;
+    }
+
+    private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
+        {
+            try { DragMove(); } catch { }
+        }
     }
 }
 

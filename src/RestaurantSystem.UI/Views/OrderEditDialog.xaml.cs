@@ -17,7 +17,7 @@ public partial class OrderEditDialog : Window
     {
         InitializeComponent();
         Tables = tables;
-        
+
         // Populate tables
         TableComboBox.ItemsSource = tables;
         if (tables.Any()) TableComboBox.SelectedIndex = 0;
@@ -29,11 +29,11 @@ public partial class OrderEditDialog : Window
         TableId = order.TableId;
         WaiterIdText = order.WaiterId?.ToString() ?? "1";
         SpecialInstructions = order.SpecialInstructions ?? string.Empty;
-        
+
         // Set fields
         var tableItem = TableComboBox.Items.OfType<Table>().FirstOrDefault(t => t.Id == TableId);
         if (tableItem != null) TableComboBox.SelectedItem = tableItem;
-        
+
         WaiterTextBox.Text = WaiterIdText;
         InstructionsTextBox.Text = SpecialInstructions;
     }
@@ -49,7 +49,7 @@ public partial class OrderEditDialog : Window
         TableId = ((Table)TableComboBox.SelectedItem).Id;
         WaiterIdText = WaiterTextBox.Text;
         SpecialInstructions = InstructionsTextBox.Text;
-        
+
         DialogResult = true;
         Close();
     }
@@ -69,5 +69,13 @@ public partial class OrderEditDialog : Window
             SpecialInstructions = SpecialInstructions,
             CreatedTime = DateTime.UtcNow
         };
+    }
+
+    private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
+        {
+            try { DragMove(); } catch { }
+        }
     }
 }

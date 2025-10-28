@@ -29,7 +29,7 @@ public partial class ReservationEditDialog : Window
     {
         InitializeComponent();
         Tables = tables;
-        
+
         Loaded += ReservationEditDialog_Loaded;
     }
 
@@ -37,7 +37,7 @@ public partial class ReservationEditDialog : Window
     {
         // Set default date
         DatePicker.SelectedDate = DateTime.Today.AddDays(1);
-        
+
         // Populate time slots
         for (int hour = 9; hour < 23; hour++)
         {
@@ -48,19 +48,19 @@ public partial class ReservationEditDialog : Window
                 TimeComboBox.Items.Add(item);
             }
         }
-        
+
         // Set initial time to next hour
         var currentTime = DateTime.Now.AddHours(1);
         var initialTime = new TimeSpan(currentTime.Hour, (currentTime.Minute / 30) * 30, 0);
         var initialItem = TimeComboBox.Items.OfType<ComboBoxItem>()
             .FirstOrDefault(i => i.Tag is TimeSpan ts && ts == initialTime);
         if (initialItem != null) TimeComboBox.SelectedItem = initialItem;
-        
+
         // Populate tables
         TableComboBox.ItemsSource = Tables;
         TableComboBox.SelectedIndex = 0;
         TableComboBox.SelectionChanged += (s, e) => UpdateTableInfo();
-        
+
         UpdateTableInfo();
     }
 
@@ -78,7 +78,7 @@ public partial class ReservationEditDialog : Window
         Title = "Edit Reservation";
         TitleTextBlock.Text = "Edit Reservation";
         StatusSection.Visibility = Visibility.Visible;
-        
+
         ReservationId = reservation.Id;
         ClientName = reservation.ClientName;
         ClientPhone = reservation.ClientPhone;
@@ -88,36 +88,36 @@ public partial class ReservationEditDialog : Window
         TableId = reservation.TableId;
         Comment = reservation.Comment ?? string.Empty;
         Status = reservation.Status.ToString();
-        
+
         // Set fields after loading
         Loaded += (s, e) =>
         {
             ClientNameTextBox.Text = ClientName;
             ClientPhoneTextBox.Text = ClientPhone;
             DatePicker.SelectedDate = ReservationDate;
-            
+
             // Select time
             var time = StartTime.TimeOfDay;
             var timeItem = TimeComboBox.Items.OfType<ComboBoxItem>()
                 .FirstOrDefault(i => i.Tag is TimeSpan ts && Math.Abs((ts - time).TotalMinutes) < 30);
             if (timeItem != null) TimeComboBox.SelectedItem = timeItem;
-            
+
             // Select duration
             var durations = new[] { 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0 };
             var durationIndex = Array.IndexOf(durations, DurationHours);
             if (durationIndex >= 0) DurationComboBox.SelectedIndex = durationIndex;
-            
+
             // Select table
             var tableItem = Tables.FirstOrDefault(t => t.Id == TableId);
             if (tableItem != null) TableComboBox.SelectedItem = tableItem;
-            
+
             // Select guests
             var guestItem = GuestComboBox.Items.OfType<ComboBoxItem>()
                 .FirstOrDefault(i => i.Tag?.ToString() == GuestsCount.ToString());
             if (guestItem != null) GuestComboBox.SelectedItem = guestItem;
-            
+
             CommentTextBox.Text = Comment;
-            
+
             // Select status
             var statusItem = StatusComboBox.Items.OfType<ComboBoxItem>()
                 .FirstOrDefault(i => i.Tag?.ToString() == Status);
@@ -152,7 +152,7 @@ public partial class ReservationEditDialog : Window
 
         if (!ValidatePhone(ClientPhoneTextBox.Text))
         {
-            MessageBox.Show("Please enter a valid phone number.\nFormat: +1234567890 or 1234567890", 
+            MessageBox.Show("Please enter a valid phone number.\nFormat: +1234567890 or 1234567890",
                 "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             ClientPhoneTextBox.Focus();
             return;
@@ -160,7 +160,7 @@ public partial class ReservationEditDialog : Window
 
         if (!ValidateEmail(ClientEmailTextBox.Text))
         {
-            MessageBox.Show("Please enter a valid email address or leave it empty.", 
+            MessageBox.Show("Please enter a valid email address or leave it empty.",
                 "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             ClientEmailTextBox.Focus();
             return;
@@ -168,7 +168,7 @@ public partial class ReservationEditDialog : Window
 
         if (DatePicker.SelectedDate == null || DatePicker.SelectedDate < DateTime.Today)
         {
-            MessageBox.Show("Please select a valid date (today or later).", 
+            MessageBox.Show("Please select a valid date (today or later).",
                 "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             DatePicker.Focus();
             return;
@@ -224,31 +224,31 @@ public partial class ReservationEditDialog : Window
         ClientPhone = ClientPhoneTextBox.Text.Trim();
         ClientEmail = ClientEmailTextBox.Text.Trim();
         ReservationDate = DatePicker.SelectedDate.Value;
-        
+
         if (TimeComboBox.SelectedItem is ComboBoxItem timeItem && timeItem.Tag is TimeSpan time)
         {
             StartTime = ReservationDate.Add(time);
         }
-        
+
         if (DurationComboBox.SelectedItem is ComboBoxItem durationItem && durationItem.Tag is string durationStr)
         {
             DurationHours = double.Parse(durationStr);
         }
-        
+
         TableId = selectedTable.Id;
-        
+
         if (GuestComboBox.SelectedItem is ComboBoxItem guestItem2 && guestItem2.Tag is string guestsStr)
         {
             GuestsCount = int.Parse(guestsStr);
         }
-        
+
         Comment = CommentTextBox.Text?.Trim() ?? string.Empty;
-        
+
         if (IsEditMode && StatusComboBox.SelectedItem is ComboBoxItem statusItem)
         {
             Status = statusItem.Tag?.ToString() ?? "Pending";
         }
-        
+
         DialogResult = true;
         Close();
     }
@@ -281,5 +281,13 @@ public partial class ReservationEditDialog : Window
         }
 
         return reservation;
+    }
+
+    private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed)
+        {
+            try { DragMove(); } catch { }
+        }
     }
 }
