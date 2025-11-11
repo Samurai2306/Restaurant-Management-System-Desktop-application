@@ -7,28 +7,39 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
-    
-    <Grid Margin="0" Background="#1E1E1E">
+
+    <Grid Margin="0"
+            Background="#1E1E1E">
         <Grid.Resources>
             <!-- ComboBox Dark Style -->
             <Style TargetType="ComboBoxItem">
-                <Setter Property="Background" Value="#404040"/>
-                <Setter Property="Foreground" Value="White"/>
-                <Setter Property="Padding" Value="12,8"/>
-                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Background"
+                        Value="#404040"/>
+                <Setter Property="Foreground"
+                        Value="White"/>
+                <Setter Property="Padding"
+                        Value="12,8"/>
+                <Setter Property="FontSize"
+                        Value="14"/>
                 <Style.Triggers>
-                    <Trigger Property="IsHighlighted" Value="True">
-                        <Setter Property="Background" Value="#505050"/>
+                    <Trigger Property="IsHighlighted"
+                            Value="True">
+                        <Setter Property="Background"
+                                Value="#505050"/>
                     </Trigger>
                 </Style.Triggers>
             </Style>
-            
+
             <Style TargetType="ComboBox">
-                <Setter Property="Background" Value="#404040"/>
-                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Background"
+                        Value="#404040"/>
+                <Setter Property="Foreground"
+                        Value="White"/>
                 <Style.Triggers>
-                    <Trigger Property="IsDropDownOpen" Value="True">
-                        <Setter Property="Background" Value="#505050"/>
+                    <Trigger Property="IsDropDownOpen"
+                            Value="True">
+                        <Setter Property="Background"
+                                Value="#505050"/>
                     </Trigger>
                 </Style.Triggers>
             </Style>
@@ -39,7 +50,7 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Border Grid.Row="0" 
+        <Border Grid.Row="0"
                 Background="#2C2C2C"
                 Padding="24"
                 BorderBrush="#E0E0E0"
@@ -49,23 +60,24 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                
-                <Grid Grid.Row="0" Margin="0,0,0,20">
+
+                <Grid Grid.Row="0"
+                        Margin="0,0,0,20">
                     <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="Бронирование" 
-                                 FontSize="28"
-                                 FontWeight="SemiBold"
-                                 Foreground="White"/>
+                        <TextBlock Text="Бронирование"
+                                   FontSize="28"
+                                   FontWeight="SemiBold"
+                                   Foreground="White"/>
                         <TextBlock Text="Управление бронированием столов"
-                                 FontSize="14"
-                                 Foreground="#999"
-                                 Margin="0,6,0,0"/>
+                                   FontSize="14"
+                                   Foreground="#999"
+                                   Margin="0,6,0,0"/>
                     </StackPanel>
-                    
-                    <StackPanel Orientation="Horizontal" 
-                               HorizontalAlignment="Right"
-                               VerticalAlignment="Center">
-                        <Button Content="НОВАЯ БРОНЬ" 
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center">
+                        <Button Content="НОВАЯ БРОНЬ"
                                 Command="{Binding AddReservationCommand}"
                                 Height="42"
                                 Padding="24,0"
@@ -76,7 +88,7 @@
                                 Foreground="White"
                                 BorderThickness="0"
                                 Cursor="Hand"/>
-                        <Button Content="↻" 
+                        <Button Content="↻"
                                 Command="{Binding RefreshCommand}"
                                 Height="42"
                                 Width="42"
@@ -89,9 +101,10 @@
                                 Cursor="Hand"/>
                     </StackPanel>
                 </Grid>
-                
+
                 <!-- Search -->
-                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <StackPanel Grid.Row="1"
+                        Orientation="Horizontal">
                     <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                              Width="400"
                              Height="42"
@@ -115,83 +128,109 @@
                 BorderBrush="#404040"
                 BorderThickness="1">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <DataGrid ItemsSource="{Binding Reservations}"
-                     SelectedItem="{Binding SelectedReservation}"
-                     AutoGenerateColumns="False"
-                     CanUserAddRows="False"
-                     CanUserDeleteRows="False"
-                     HeadersVisibility="All"
-                     GridLinesVisibility="None"
-                     SelectionMode="Single"
-                     IsReadOnly="True"
-                     RowHeight="60"
-                     FontSize="14"
-                     BorderThickness="0"
-                     Background="Transparent"
-                     MaxHeight="600">
-                
-                <DataGrid.ColumnHeaderStyle>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#505050"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="FontWeight" Value="SemiBold"/>
-                        <Setter Property="FontSize" Value="13"/>
-                        <Setter Property="Padding" Value="16,12"/>
-                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                        <Setter Property="BorderBrush" Value="#666666"/>
-                    </Style>
-                </DataGrid.ColumnHeaderStyle>
-                
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="Background" Value="#404040"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                        <Setter Property="BorderBrush" Value="#555555"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#505050"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.RowStyle>
-                
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Client Name" Binding="{Binding ClientName}" Width="*"/>
-                    <DataGridTextColumn Header="Phone" Binding="{Binding ClientPhone}" Width="*"/>
-                    <DataGridTextColumn Header="Table" Binding="{Binding TableName}" Width="Auto"/>
-                    <DataGridTextColumn Header="Start Time" Binding="{Binding StartTime, StringFormat=HH:mm}" Width="Auto"/>
-                    <DataGridTextColumn Header="End Time" Binding="{Binding EndTime, StringFormat=HH:mm}" Width="Auto"/>
-                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="Auto"/>
-                    <DataGridTemplateColumn Header="Actions" Width="Auto">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Content="Edit"
-                                           Padding="12,0"
-                                           Margin="0,0,8,0"
-                                           Background="Transparent"
-                                           Foreground="#673AB7"
-                                           BorderBrush="#673AB7"
-                                           BorderThickness="1"
-                                           FontSize="12"
-                                           FontWeight="Medium"
-                                           Cursor="Hand"/>
-                                    <Button Content="Cancel"
-                                           Padding="12,0"
-                                           Background="Transparent"
-                                           Foreground="#F44336"
-                                           BorderBrush="#F44336"
-                                           BorderThickness="1"
-                                           FontSize="12"
-                                           FontWeight="Medium"
-                                           Cursor="Hand"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+                <DataGrid ItemsSource="{Binding Reservations}"
+                          SelectedItem="{Binding SelectedReservation}"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="False"
+                          HeadersVisibility="All"
+                          GridLinesVisibility="None"
+                          SelectionMode="Single"
+                          IsReadOnly="True"
+                          RowHeight="60"
+                          FontSize="14"
+                          BorderThickness="0"
+                          Background="Transparent"
+                          MaxHeight="600">
+
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background"
+                                    Value="#505050"/>
+                            <Setter Property="Foreground"
+                                    Value="White"/>
+                            <Setter Property="FontWeight"
+                                    Value="SemiBold"/>
+                            <Setter Property="FontSize"
+                                    Value="13"/>
+                            <Setter Property="Padding"
+                                    Value="16,12"/>
+                            <Setter Property="BorderThickness"
+                                    Value="0,0,0,1"/>
+                            <Setter Property="BorderBrush"
+                                    Value="#666666"/>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Background"
+                                    Value="#404040"/>
+                            <Setter Property="Foreground"
+                                    Value="White"/>
+                            <Setter Property="BorderThickness"
+                                    Value="0,0,0,1"/>
+                            <Setter Property="BorderBrush"
+                                    Value="#555555"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver"
+                                        Value="True">
+                                    <Setter Property="Background"
+                                            Value="#505050"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Client Name"
+                                Binding="{Binding ClientName}"
+                                Width="*"/>
+                        <DataGridTextColumn Header="Phone"
+                                Binding="{Binding ClientPhone}"
+                                Width="*"/>
+                        <DataGridTextColumn Header="Table"
+                                Binding="{Binding TableName}"
+                                Width="Auto"/>
+                        <DataGridTextColumn Header="Время начала"
+                                Binding="{Binding StartTime, StringFormat=HH:mm}"
+                                Width="Auto"/>
+                        <DataGridTextColumn Header="Время окончания"
+                                Binding="{Binding EndTime, StringFormat=HH:mm}"
+                                Width="Auto"/>
+                        <DataGridTextColumn Header="Status"
+                                Binding="{Binding Status}"
+                                Width="Auto"/>
+                        <DataGridTemplateColumn Header="Actions"
+                                Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Content="Edit"
+                                                Padding="12,0"
+                                                Margin="0,0,8,0"
+                                                Background="Transparent"
+                                                Foreground="#673AB7"
+                                                BorderBrush="#673AB7"
+                                                BorderThickness="1"
+                                                FontSize="12"
+                                                FontWeight="Medium"
+                                                Cursor="Hand"/>
+                                        <Button Content="Cancel"
+                                                Padding="12,0"
+                                                Background="Transparent"
+                                                Foreground="#F44336"
+                                                BorderBrush="#F44336"
+                                                BorderThickness="1"
+                                                FontSize="12"
+                                                FontWeight="Medium"
+                                                Cursor="Hand"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
             </ScrollViewer>
         </Border>
     </Grid>

@@ -123,7 +123,7 @@ public static class DependencyInjection
                 Console.WriteLine($"Warning listing sqlite tables: {ex.Message}");
             }
 
-            // Add seed data only if tables are empty
+            // Add seed data for tables if empty
             if (!context.Tables.Any())
             {
                 // Создаём столы
@@ -141,7 +141,13 @@ public static class DependencyInjection
                     new RestaurantSystem.Core.Models.Table { Name = "VIP 2", Location = RestaurantSystem.Core.Enums.TableLocation.MainHall, SeatsCount = 10 }
                 };
                 context.Tables.AddRange(tables);
+                await context.SaveChangesAsync(default);
+                Console.WriteLine("Database seeded with tables");
+            }
 
+            // Add seed data for dishes if empty
+            if (!context.Dishes.Any())
+            {
                 // Создаём блюда
                 var dishes = new[]
                 {
@@ -190,7 +196,7 @@ public static class DependencyInjection
                 context.Dishes.AddRange(dishes);
 
                 await context.SaveChangesAsync(default);
-                Console.WriteLine("Database seeded with Russian test data");
+                Console.WriteLine("Database seeded with dishes");
             }
 
             // Ensure default admin and waiter users exist and have correct password hashes

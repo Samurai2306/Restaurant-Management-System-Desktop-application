@@ -3,13 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:enums="clr-namespace:RestaurantSystem.Core.Enums;assembly=RestaurantSystem.Core"
         Title="Добавить блюдо"
-        Height="750" Width="550"
+        Height="750"
+        Width="550"
         WindowStartupLocation="CenterScreen"
         Background="#1E1E1E"
         Foreground="White"
         ResizeMode="NoResize"
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
-    
+
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,67 +19,242 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Border Grid.Row="0" CornerRadius="8" Margin="0,0,0,20">
+        <Border Grid.Row="0"
+                CornerRadius="8"
+                Margin="0,0,0,20">
             <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                    <GradientStop Color="#673AB7" Offset="0"/>
-                    <GradientStop Color="#512DA8" Offset="1"/>
+                <LinearGradientBrush StartPoint="0,0"
+                        EndPoint="1,0">
+                    <GradientStop Color="#673AB7"
+                            Offset="0"/>
+                    <GradientStop Color="#512DA8"
+                            Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
             <StackPanel Margin="20,16">
-                <TextBlock x:Name="TitleTextBlock" Text="Добавить блюдо" 
-                          FontSize="24" FontWeight="Bold" Foreground="White"/>
-                <TextBlock Text="Введите информацию о блюде и цену" 
-                          FontSize="12" Foreground="White" Opacity="0.9" Margin="0,4,0,0"/>
+                <TextBlock x:Name="TitleTextBlock"
+                        Text="Добавить блюдо"
+                           FontSize="24"
+                        FontWeight="Bold"
+                        Foreground="White"/>
+                <TextBlock Text="Введите информацию о блюде и цену"
+                           FontSize="12"
+                        Foreground="White"
+                        Opacity="0.9"
+                        Margin="0,4,0,0"/>
             </StackPanel>
         </Border>
 
         <!-- Form -->
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="1"
+                VerticalScrollBarVisibility="Auto"
+                HorizontalScrollBarVisibility="Auto">
             <StackPanel>
-                
+
                 <!-- Basic Information -->
-                <Border Background="#2C2C2C" BorderBrush="#404040" BorderThickness="1" 
-                        CornerRadius="6" Padding="16" Margin="0,0,0,16">
+                <Border Background="#2C2C2C"
+                        BorderBrush="#404040"
+                        BorderThickness="1"
+                        CornerRadius="6"
+                        Padding="16"
+                        Margin="0,0,0,16">
                     <StackPanel>
-                        <TextBlock Text="Основная информация" FontSize="14" FontWeight="Bold" 
-                                  Foreground="#673AB7" Margin="0,0,0,16"/>
-                        
-                        <TextBlock Text="Название блюда *" FontSize="13" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,6"/>
-                        <TextBox x:Name="NameTextBox" Height="40" Padding="12,0" FontSize="14"
-                                Background="#1E1E1E" Foreground="White" BorderBrush="#404040" BorderThickness="1"
-                                MaxLength="100" Margin="0,0,0,16"/>
-                        
-                        <TextBlock Text="Категория *" FontSize="13" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,6"/>
-                        <ComboBox x:Name="CategoryComboBox" Height="40" FontSize="14"
-                                 Background="#1E1E1E" Foreground="White" BorderBrush="#404040" BorderThickness="1" Margin="0,0,0,16">
-                            <ComboBoxItem Content="Закуска" Tag="Appetizer"/>
-                            <ComboBoxItem Content="Супы" Tag="Soup"/>
-                            <ComboBoxItem Content="Салаты" Tag="Salad"/>
-                            <ComboBoxItem Content="Основное блюдо" Tag="MainCourse" IsSelected="True"/>
-                            <ComboBoxItem Content="Гарнир" Tag="SideDish"/>
-                            <ComboBoxItem Content="Десерт" Tag="Dessert"/>
-                            <ComboBoxItem Content="Напитки" Tag="Beverage"/>
-                            <ComboBoxItem Content="Алкоголь" Tag="Alcohol"/>
+                        <TextBlock Text="Основная информация"
+                                FontSize="14"
+                                FontWeight="Bold"
+                                   Foreground="#673AB7"
+                                Margin="0,0,0,16"/>
+
+                        <TextBlock Text="Название блюда *"
+                                FontSize="13"
+                                FontWeight="SemiBold"
+                                Foreground="White"
+                                Margin="0,0,0,6"/>
+                        <TextBox x:Name="NameTextBox"
+                                Height="40"
+                                Padding="12,0"
+                                FontSize="14"
+                                 Background="#1E1E1E"
+                                Foreground="White"
+                                BorderBrush="#404040"
+                                BorderThickness="1"
+                                 MaxLength="100"
+                                Margin="0,0,0,16"/>
+
+                        <TextBlock Text="Категория *"
+                                FontSize="13"
+                                FontWeight="SemiBold"
+                                Foreground="White"
+                                Margin="0,0,0,6"/>
+                        <ComboBox x:Name="CategoryComboBox"
+                                Height="40"
+                                FontSize="14"
+                                  Background="#1E1E1E"
+                                Foreground="White"
+                                BorderBrush="#404040"
+                                BorderThickness="1"
+                                Margin="0,0,0,16">
+                            <ComboBoxItem Content="Закуска"
+                                    Tag="Appetizer"
+                                    Background="#1E1E1E"
+                                    Foreground="White"/>
+                            <ComboBoxItem Content="Супы"
+                                    Tag="Soup"
+                                    Background="#1E1E1E"
+                                    Foreground="White"/>
+                            <ComboBoxItem Content="Салаты"
+                                    Tag="Salad"
+                                    Background="#1E1E1E"
+                                    Foreground="White"/>
+                            <ComboBoxItem Content="Основное блюдо"
+                                    Tag="MainCourse"
+                                    IsSelected="True"
+                                    Background="#1E1E1E"
+                                    Foreground="White"/>
+                            <ComboBoxItem Content="Гарнир"
+                                    Tag="SideDish"
+                                    Background="#1E1E1E"
+                                    Foreground="White"/>
+                            <ComboBoxItem Content="Десерт"
+                                    Tag="Dessert"
+                                    Background="#1E1E1E"
+                                    Foreground="White"/>
+                            <ComboBoxItem Content="Напитки"
+                                    Tag="Beverage"
+                                    Background="#1E1E1E"
+                                    Foreground="White"/>
+                            <ComboBoxItem Content="Алкоголь"
+                                    Tag="Alcohol"
+                                    Background="#1E1E1E"
+                                    Foreground="White"/>
                         </ComboBox>
-                        
-                        <TextBlock Text="Описание" FontSize="13" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,6"/>
-                        <TextBox x:Name="DescriptionTextBox" MinHeight="100" Padding="12,8" FontSize="14"
-                                TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"
-                                Background="#1E1E1E" Foreground="White" BorderBrush="#404040" BorderThickness="1"
-                                MaxLength="500" Margin="0,0,0,8"/>
-                        <TextBlock Text="Краткое описание блюда (необязательно, но рекомендуется)" 
-                                 FontSize="11" Foreground="#999" Margin="4,0,0,0"/>
+
+                        <TextBlock Text="Описание"
+                                FontSize="13"
+                                FontWeight="SemiBold"
+                                Foreground="White"
+                                Margin="0,0,0,6"/>
+                        <TextBox x:Name="DescriptionTextBox"
+                                MinHeight="100"
+                                Padding="12,8"
+                                FontSize="14"
+                                 TextWrapping="Wrap"
+                                AcceptsReturn="True"
+                                VerticalScrollBarVisibility="Auto"
+                                 Background="#1E1E1E"
+                                Foreground="White"
+                                BorderBrush="#404040"
+                                BorderThickness="1"
+                                 MaxLength="500"
+                                Margin="0,0,0,8"/>
+                        <TextBlock Text="Краткое описание блюда (необязательно, но рекомендуется)"
+                                   FontSize="11"
+                                Foreground="#999"
+                                Margin="4,0,0,0"/>
+
+                        <!-- Allergens -->
+                        <TextBlock Text="Аллергены"
+                                FontSize="13"
+                                FontWeight="SemiBold"
+                                Foreground="White"
+                                Margin="0,16,0,6"/>
+                        <WrapPanel Margin="0,0,0,8">
+                            <CheckBox x:Name="AllergenGluten"
+                                    Content="Глютен"
+                                    Foreground="White"
+                                    Margin="0,0,12,0"/>
+                            <CheckBox x:Name="AllergenLactose"
+                                    Content="Лактоза"
+                                    Foreground="White"
+                                    Margin="0,0,12,0"/>
+                            <CheckBox x:Name="AllergenNuts"
+                                    Content="Орехи"
+                                    Foreground="White"
+                                    Margin="0,0,12,0"/>
+                            <CheckBox x:Name="AllergenEggs"
+                                    Content="Яйца"
+                                    Foreground="White"
+                                    Margin="0,0,12,0"/>
+                            <CheckBox x:Name="AllergenFish"
+                                    Content="Рыба"
+                                    Foreground="White"
+                                    Margin="0,0,12,0"/>
+                            <CheckBox x:Name="AllergenShellfish"
+                                    Content="Моллюски"
+                                    Foreground="White"
+                                    Margin="0,0,12,0"/>
+                            <CheckBox x:Name="AllergenSoy"
+                                    Content="Соя"
+                                    Foreground="White"
+                                    Margin="0,0,12,0"/>
+                            <CheckBox x:Name="AllergenCelery"
+                                    Content="Сельдерей"
+                                    Foreground="White"
+                                    Margin="0,0,12,0"/>
+                            <CheckBox x:Name="AllergenMustard"
+                                    Content="Горчица"
+                                    Foreground="White"
+                                    Margin="0,0,12,0"/>
+                            <CheckBox x:Name="AllergenSesame"
+                                    Content="Кунжут"
+                                    Foreground="White"
+                                    Margin="0,0,12,0"/>
+                            <CheckBox x:Name="AllergenSulfites"
+                                    Content="Сульфиты"
+                                    Foreground="White"
+                                    Margin="0,0,12,0"/>
+                        </WrapPanel>
+
+                        <!-- Image Path -->
+                        <TextBlock Text="Изображение (путь или URL)"
+                                FontSize="13"
+                                FontWeight="SemiBold"
+                                Foreground="White"
+                                Margin="0,0,0,6"/>
+                        <TextBox x:Name="ImagePathTextBox"
+                                Height="32"
+                                Padding="8,0"
+                                FontSize="13"
+                                 Background="#1E1E1E"
+                                Foreground="White"
+                                BorderBrush="#404040"
+                                BorderThickness="1"
+                                 MaxLength="255"
+                                Margin="0,0,0,8"/>
+
+                        <!-- Tags -->
+                        <TextBlock Text="Теги (через запятую)"
+                                FontSize="13"
+                                FontWeight="SemiBold"
+                                Foreground="White"
+                                Margin="0,0,0,6"/>
+                        <TextBox x:Name="TagsTextBox"
+                                Height="32"
+                                Padding="8,0"
+                                FontSize="13"
+                                 Background="#1E1E1E"
+                                Foreground="White"
+                                BorderBrush="#404040"
+                                BorderThickness="1"
+                                 MaxLength="500"
+                                Margin="0,0,0,8"/>
                     </StackPanel>
                 </Border>
-                
+
                 <!-- Pricing & Preparation -->
-                <Border Background="#2C2C2C" BorderBrush="#404040" BorderThickness="1" 
-                        CornerRadius="6" Padding="16" Margin="0,0,0,16">
+                <Border Background="#2C2C2C"
+                        BorderBrush="#404040"
+                        BorderThickness="1"
+                        CornerRadius="6"
+                        Padding="16"
+                        Margin="0,0,0,16">
                     <StackPanel>
-                        <TextBlock Text="Цена и время приготовления" FontSize="14" FontWeight="Bold" 
-                                  Foreground="#673AB7" Margin="0,0,0,16"/>
-                        
+                        <TextBlock Text="Цена и время приготовления"
+                                FontSize="14"
+                                FontWeight="Bold"
+                                   Foreground="#673AB7"
+                                Margin="0,0,0,16"/>
+
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -89,82 +265,158 @@
                                 <ColumnDefinition Width="10"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <!-- Price -->
-                            <StackPanel Grid.Column="0" Grid.Row="0">
-                                <TextBlock Text="Цена ($) *" FontSize="13" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,6"/>
+                            <StackPanel Grid.Column="0"
+                                    Grid.Row="0">
+                                <TextBlock Text="Цена ($) *"
+                                        FontSize="13"
+                                        FontWeight="SemiBold"
+                                        Foreground="White"
+                                        Margin="0,0,0,6"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBox x:Name="PriceTextBox" Grid.Column="0" Height="40" Padding="12,0" FontSize="14"
-                                           Background="#1E1E1E" Foreground="White" BorderBrush="#404040" BorderThickness="1"
-                                           HorizontalContentAlignment="Right"/>
-                                    <TextBlock Text="$" Grid.Column="1" VerticalAlignment="Center" 
-                                             Foreground="White" FontSize="14" Margin="8,0,0,0"/>
+                                    <TextBox x:Name="PriceTextBox"
+                                            Grid.Column="0"
+                                            Height="40"
+                                            Padding="12,0"
+                                            FontSize="14"
+                                             Background="#1E1E1E"
+                                            Foreground="White"
+                                            BorderBrush="#404040"
+                                            BorderThickness="1"
+                                             HorizontalContentAlignment="Right"/>
+                                    <TextBlock Text="$"
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                               Foreground="White"
+                                            FontSize="14"
+                                            Margin="8,0,0,0"/>
                                 </Grid>
-                                <TextBlock Text="Enter price between $0.01 - $10,000" FontSize="11" Foreground="#999" Margin="4,4,0,0"/>
+                                <TextBlock Text="Введите цену от $0.01 до $10,000"
+                                        FontSize="11"
+                                        Foreground="#999"
+                                        Margin="4,4,0,0"/>
                             </StackPanel>
-                            
+
                             <!-- Cooking Time -->
-                            <StackPanel Grid.Column="2" Grid.Row="0">
-                                <TextBlock Text="Cooking Time (min) *" FontSize="13" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,6"/>
+                            <StackPanel Grid.Column="2"
+                                    Grid.Row="0">
+                                <TextBlock Text="Время приготовления (мин) *"
+                                        FontSize="13"
+                                        FontWeight="SemiBold"
+                                        Foreground="White"
+                                        Margin="0,0,0,6"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBox x:Name="CookingTimeTextBox" Grid.Column="0" Height="40" Padding="12,0" FontSize="14"
-                                           Text="30" Background="#1E1E1E" Foreground="White" BorderBrush="#404040" BorderThickness="1"
-                                           HorizontalContentAlignment="Right"/>
-                                    <TextBlock Text="min" Grid.Column="1" VerticalAlignment="Center" 
-                                             Foreground="White" FontSize="14" Margin="8,0,0,0"/>
+                                    <TextBox x:Name="CookingTimeTextBox"
+                                            Grid.Column="0"
+                                            Height="40"
+                                            Padding="12,0"
+                                            FontSize="14"
+                                             Text="30"
+                                            Background="#1E1E1E"
+                                            Foreground="White"
+                                            BorderBrush="#404040"
+                                            BorderThickness="1"
+                                             HorizontalContentAlignment="Right"/>
+                                    <TextBlock Text="мин"
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                               Foreground="White"
+                                            FontSize="14"
+                                            Margin="8,0,0,0"/>
                                 </Grid>
-                                <TextBlock Text="Enter time between 1 - 180 minutes" FontSize="11" Foreground="#999" Margin="4,4,0,0"/>
+                                <TextBlock Text="Введите время от 1 до 180 минут"
+                                        FontSize="11"
+                                        Foreground="#999"
+                                        Margin="4,4,0,0"/>
                             </StackPanel>
-                            
+
                             <!-- Availability -->
-                            <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Margin="0,16,0,0">
-                                <CheckBox x:Name="IsAvailableCheckBox" 
-                                         Content="Dish is currently available for ordering" 
-                                         IsChecked="True" Foreground="White" FontSize="14" 
-                                         FontWeight="Medium" VerticalContentAlignment="Center" Height="32"/>
+                            <StackPanel Grid.Column="0"
+                                    Grid.ColumnSpan="3"
+                                    Grid.Row="1"
+                                    Margin="0,16,0,0">
+                                <CheckBox x:Name="IsAvailableCheckBox"
+                                          Content="Dish is currently available for ordering"
+                                          IsChecked="True"
+                                        Foreground="White"
+                                        FontSize="14"
+                                          FontWeight="Medium"
+                                        VerticalContentAlignment="Center"
+                                        Height="32"/>
                             </StackPanel>
                         </Grid>
                     </StackPanel>
                 </Border>
-                
-                <TextBlock Text="* Required fields" FontSize="11" Foreground="#999" Margin="0,0,0,8"/>
-                <TextBlock Text="Tip: Add detailed descriptions to help customers make informed choices." 
-                         FontSize="11" Foreground="#999" TextWrapping="Wrap"/>
+
+                <TextBlock Text="* Required fields"
+                        FontSize="11"
+                        Foreground="#999"
+                        Margin="0,0,0,8"/>
+                <TextBlock Text="Совет: добавьте подробные описания, чтобы помочь клиентам сделать выбор."
+                           FontSize="11"
+                        Foreground="#999"
+                        TextWrapping="Wrap"/>
             </StackPanel>
         </ScrollViewer>
 
         <!-- Buttons -->
-        <Border Grid.Row="2" BorderThickness="0,1,0,0" BorderBrush="#404040" Padding="0,16,0,0">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Отмена" IsCancel="True" Click="Cancel_Click"
-                       Background="Transparent" Foreground="#999" BorderBrush="#404040" BorderThickness="1" 
-                       Padding="24,10" FontSize="13" FontWeight="Medium" Margin="0,0,12,0" Cursor="Hand">
+        <Border Grid.Row="2"
+                BorderThickness="0,1,0,0"
+                BorderBrush="#404040"
+                Padding="0,16,0,0">
+            <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+                <Button Content="Отмена"
+                        IsCancel="True"
+                        Click="Cancel_Click"
+                        Background="Transparent"
+                        Foreground="#999"
+                        BorderBrush="#404040"
+                        BorderThickness="1"
+                        Padding="24,10"
+                        FontSize="13"
+                        FontWeight="Medium"
+                        Margin="0,0,12,0"
+                        Cursor="Hand">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Background="{TemplateBinding Background}"
-                                   BorderBrush="{TemplateBinding BorderBrush}"
-                                   BorderThickness="{TemplateBinding BorderThickness}"
-                                   CornerRadius="6" Padding="{TemplateBinding Padding}">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="6"
+                                    Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button Content="Добавить блюдо" IsDefault="True" Click="Save_Click"
-                       Background="#673AB7" Foreground="White" BorderThickness="0" 
-                       Padding="32,10" FontSize="13" FontWeight="SemiBold" Cursor="Hand">
+                <Button Content="Добавить блюдо"
+                        IsDefault="True"
+                        Click="Save_Click"
+                        Background="#673AB7"
+                        Foreground="White"
+                        BorderThickness="0"
+                        Padding="32,10"
+                        FontSize="13"
+                        FontWeight="SemiBold"
+                        Cursor="Hand">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="6" Padding="{TemplateBinding Padding}">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Border Background="{TemplateBinding Background}"
+                                    CornerRadius="6"
+                                    Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>

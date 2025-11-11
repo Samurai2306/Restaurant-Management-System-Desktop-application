@@ -16,6 +16,9 @@ public partial class DishEditDialog : Window
     public int CookingTime { get; set; } = 30;
     public bool IsAvailable { get; set; } = true;
     public int? DishId { get; set; }
+    public string ImagePath { get; set; } = string.Empty;
+    public string Tags { get; set; } = string.Empty;
+    public Allergen Allergens { get; set; } = Allergen.None;
 
     public DishEditDialog()
     {
@@ -33,6 +36,9 @@ public partial class DishEditDialog : Window
         Price = dish.Price;
         CookingTime = dish.CookingTimeMinutes;
         IsAvailable = dish.IsAvailable;
+        ImagePath = dish.ImagePath ?? string.Empty;
+        Tags = dish.Tags ?? string.Empty;
+        Allergens = dish.Allergens;
 
         // Set fields after loading
         Loaded += (s, e) =>
@@ -42,6 +48,21 @@ public partial class DishEditDialog : Window
             PriceTextBox.Text = Price.ToString("F2");
             CookingTimeTextBox.Text = CookingTime.ToString();
             IsAvailableCheckBox.IsChecked = IsAvailable;
+            ImagePathTextBox.Text = ImagePath;
+            TagsTextBox.Text = Tags;
+
+            // Allergens checkboxes
+            AllergenGluten.IsChecked = Allergens.HasFlag(Allergen.Gluten);
+            AllergenLactose.IsChecked = Allergens.HasFlag(Allergen.Lactose);
+            AllergenNuts.IsChecked = Allergens.HasFlag(Allergen.Nuts);
+            AllergenEggs.IsChecked = Allergens.HasFlag(Allergen.Eggs);
+            AllergenFish.IsChecked = Allergens.HasFlag(Allergen.Fish);
+            AllergenShellfish.IsChecked = Allergens.HasFlag(Allergen.Shellfish);
+            AllergenSoy.IsChecked = Allergens.HasFlag(Allergen.Soy);
+            AllergenCelery.IsChecked = Allergens.HasFlag(Allergen.Celery);
+            AllergenMustard.IsChecked = Allergens.HasFlag(Allergen.Mustard);
+            AllergenSesame.IsChecked = Allergens.HasFlag(Allergen.Sesame);
+            AllergenSulfites.IsChecked = Allergens.HasFlag(Allergen.Sulfites);
 
             // Select category
             var catItem = CategoryComboBox.Items.OfType<ComboBoxItem>()
@@ -103,6 +124,22 @@ public partial class DishEditDialog : Window
         Price = price;
         CookingTime = cookingTime;
         IsAvailable = IsAvailableCheckBox.IsChecked ?? true;
+        ImagePath = ImagePathTextBox.Text?.Trim() ?? string.Empty;
+        Tags = TagsTextBox.Text?.Trim() ?? string.Empty;
+
+        // Allergens
+        Allergens = Allergen.None;
+        if (AllergenGluten.IsChecked == true) Allergens |= Allergen.Gluten;
+        if (AllergenLactose.IsChecked == true) Allergens |= Allergen.Lactose;
+        if (AllergenNuts.IsChecked == true) Allergens |= Allergen.Nuts;
+        if (AllergenEggs.IsChecked == true) Allergens |= Allergen.Eggs;
+        if (AllergenFish.IsChecked == true) Allergens |= Allergen.Fish;
+        if (AllergenShellfish.IsChecked == true) Allergens |= Allergen.Shellfish;
+        if (AllergenSoy.IsChecked == true) Allergens |= Allergen.Soy;
+        if (AllergenCelery.IsChecked == true) Allergens |= Allergen.Celery;
+        if (AllergenMustard.IsChecked == true) Allergens |= Allergen.Mustard;
+        if (AllergenSesame.IsChecked == true) Allergens |= Allergen.Sesame;
+        if (AllergenSulfites.IsChecked == true) Allergens |= Allergen.Sulfites;
 
         if (CategoryComboBox.SelectedItem is ComboBoxItem catItem &&
             Enum.TryParse<DishCategory>(catItem.Tag?.ToString(), out var category))
@@ -130,7 +167,9 @@ public partial class DishEditDialog : Window
             Category = Category,
             CookingTimeMinutes = CookingTime,
             IsAvailable = IsAvailable,
-            ImagePath = string.Empty
+            ImagePath = ImagePath,
+            Tags = Tags,
+            Allergens = Allergens
         };
 
         if (DishId.HasValue)
