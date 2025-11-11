@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWPF>false</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RestaurantSystem.Core\RestaurantSystem.Core.csproj" />
+    <ProjectReference Include="..\RestaurantSystem.Data\RestaurantSystem.Data.csproj" />
+    <ProjectReference Include="..\RestaurantSystem.UI\RestaurantSystem.UI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+  <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.10" />
+  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.10" />
+  </ItemGroup>
+</Project>

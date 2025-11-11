@@ -4,6 +4,8 @@ using RestaurantSystem.Core.Interfaces.Repositories;
 using RestaurantSystem.Data.Context;
 using RestaurantSystem.Data.Repositories;
 using System.Linq;
+using System.IO;
+using System.Data.Common;
 
 namespace RestaurantSystem.Data;
 
@@ -13,16 +15,16 @@ public static class DependencyInjection
       this IServiceCollection services,
  string connectionString)
     {
- // Register DbContext
-      services.AddDbContext<AppDbContext>(options =>
-     options.UseSqlite(connectionString));
+        // Register DbContext
+        services.AddDbContext<AppDbContext>(options =>
+       options.UseSqlite(connectionString));
 
-      // Register repositories
+        // Register repositories
         services.AddScoped<ITableRepository, TableRepository>();
-      services.AddScoped<IReservationRepository, ReservationRepository>();
-      services.AddScoped<IDishRepository, DishRepository>();
-      services.AddScoped<IOrderRepository, OrderRepository>();
-      services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IReservationRepository, ReservationRepository>();
+        services.AddScoped<IDishRepository, DishRepository>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
         return services;
     }
@@ -33,10 +35,94 @@ public static class DependencyInjection
         {
             using var scope = serviceProvider.CreateScope();
             var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-            
+
+            // If SQLite file exists but schema is missing (e.g. corrupted/partial DB), remove it so EnsureCreated can recreate.
+            try
+            {
+                var dbConnection = context.Database.GetDbConnection();
+                var dataSource = dbConnection.DataSource;
+                if (!string.IsNullOrWhiteSpace(dataSource) && File.Exists(dataSource))
+                {
+                    // Open connection and check for Users table
+                    await dbConnection.OpenAsync();
+                    using var cmd = dbConnection.CreateCommand();
+                    cmd.CommandText = "SELECT name FROM sqlite_master WHERE type='table' AND name='Users';";
+                    var res = await cmd.ExecuteScalarAsync();
+                    await dbConnection.CloseAsync();
+
+                    if (res == null)
+                    {
+                        Console.WriteLine($"Existing SQLite DB found at '{dataSource}' but Users table missing. Recreating DB.");
+                        try { File.Delete(dataSource); } catch { /* ignore deletion errors */ }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Warning checking sqlite db file: {ex.Message}");
+            }
+
             // Ensure database is created
             await context.Database.EnsureCreatedAsync();
-            
+
+            // Diagnostic: list tables after EnsureCreated to verify schema
+            try
+            {
+                var conn = context.Database.GetDbConnection();
+                await conn.OpenAsync();
+                using var listCmd = conn.CreateCommand();
+                listCmd.CommandText = "SELECT name FROM sqlite_master WHERE type='table';";
+                using var reader = await listCmd.ExecuteReaderAsync();
+                var tables = new List<string>();
+                while (await reader.ReadAsync())
+                {
+                    tables.Add(reader.GetString(0));
+                }
+                Console.WriteLine("SQLite tables after EnsureCreated: " + string.Join(", ", tables));
+                // If Users table is missing (project used migrations that don't include User), create it manually so seeding can proceed.
+                if (!tables.Contains("Users", StringComparer.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine("Users table missing after EnsureCreated - creating Users table manually.");
+                    // ensure connection is open for creation
+                    if (conn.State != System.Data.ConnectionState.Open)
+                        await conn.OpenAsync();
+
+                    using var createCmd = conn.CreateCommand();
+                    createCmd.CommandText = "CREATE TABLE IF NOT EXISTS \"Users\" (" +
+                        "\"Id\" INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        "\"Username\" TEXT NOT NULL," +
+                        "\"PasswordHash\" TEXT NOT NULL," +
+                        "\"FirstName\" TEXT NOT NULL," +
+                        "\"LastName\" TEXT NOT NULL," +
+                        "\"Email\" TEXT NOT NULL," +
+                        "\"Phone\" TEXT," +
+                        "\"Role\" TEXT NOT NULL," +
+                        "\"IsActive\" INTEGER NOT NULL DEFAULT 1," +
+                        "\"ProfilePicturePath\" TEXT," +
+                        "\"LastLogin\" TEXT," +
+                        "\"CreatedAt\" TEXT NOT NULL," +
+                        "\"UpdatedAt\" TEXT NOT NULL," +
+                        "\"IsDeleted\" INTEGER NOT NULL DEFAULT 0" +
+                        ")";
+                    await createCmd.ExecuteNonQueryAsync();
+
+                    // Create unique indexes similar to EF configuration (filtered indexes may not be supported everywhere)
+                    using var idx1 = conn.CreateCommand();
+                    idx1.CommandText = "CREATE UNIQUE INDEX IF NOT EXISTS IX_Users_Username ON Users(Username) WHERE IsDeleted = 0;";
+                    await idx1.ExecuteNonQueryAsync();
+
+                    using var idx2 = conn.CreateCommand();
+                    idx2.CommandText = "CREATE UNIQUE INDEX IF NOT EXISTS IX_Users_Email ON Users(Email) WHERE IsDeleted = 0;";
+                    await idx2.ExecuteNonQueryAsync();
+
+                    await conn.CloseAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Warning listing sqlite tables: {ex.Message}");
+            }
+
             // Add seed data only if tables are empty
             if (!context.Tables.Any())
             {
@@ -55,7 +141,7 @@ public static class DependencyInjection
                     new RestaurantSystem.Core.Models.Table { Name = "VIP 2", Location = RestaurantSystem.Core.Enums.TableLocation.MainHall, SeatsCount = 10 }
                 };
                 context.Tables.AddRange(tables);
-                
+
                 // Создаём блюда
                 var dishes = new[]
                 {
@@ -107,57 +193,89 @@ public static class DependencyInjection
                 Console.WriteLine("Database seeded with Russian test data");
             }
 
-            // Seed default admin user separately
-            if (!context.Users.Any())
+            // Ensure default admin and waiter users exist and have correct password hashes
+            try
             {
-                Console.WriteLine("Creating default users...");
-                
-                // Create admin user
+                Console.WriteLine("Ensuring default admin and waiter users exist...");
+
                 var adminPassword = "admin123";
                 var adminHash = HashPassword(adminPassword);
-                Console.WriteLine($"Admin user hash created: {adminHash}");
-                
-                var adminUser = new RestaurantSystem.Core.Models.User
-                {
-                    Username = "admin",
-                    PasswordHash = adminHash,
-                    FirstName = "Admin",
-                    LastName = "User",
-                    Email = "admin@restaurant.com",
-                    Phone = "1234567890",
-                    Role = RestaurantSystem.Core.Enums.UserRole.Admin,
-                    IsActive = true,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
-                };
-                context.Users.Add(adminUser);
 
-                // Seed a waiter user
                 var waiterPassword = "waiter123";
                 var waiterHash = HashPassword(waiterPassword);
-                Console.WriteLine($"Waiter user hash created: {waiterHash}");
-                
-                var waiterUser = new RestaurantSystem.Core.Models.User
+
+                var adminUser = context.Users.FirstOrDefault(u => u.Username == "admin");
+                if (adminUser == null)
                 {
-                    Username = "waiter",
-                    PasswordHash = waiterHash,
-                    FirstName = "John",
-                    LastName = "Doe",
-                    Email = "waiter@restaurant.com",
-                    Phone = "9876543210",
-                    Role = RestaurantSystem.Core.Enums.UserRole.Waiter,
-                    IsActive = true,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
-                };
-                context.Users.Add(waiterUser);
+                    adminUser = new RestaurantSystem.Core.Models.User
+                    {
+                        Username = "admin",
+                        PasswordHash = adminHash,
+                        FirstName = "Admin",
+                        LastName = "User",
+                        Email = "admin@restaurant.com",
+                        Phone = "1234567890",
+                        Role = RestaurantSystem.Core.Enums.UserRole.Admin,
+                        IsActive = true,
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow
+                    };
+                    context.Users.Add(adminUser);
+                    Console.WriteLine("Admin user created");
+                }
+                else
+                {
+                    if (string.IsNullOrWhiteSpace(adminUser.PasswordHash) || adminUser.PasswordHash != adminHash)
+                    {
+                        adminUser.PasswordHash = adminHash;
+                        adminUser.UpdatedAt = DateTime.UtcNow;
+                        Console.WriteLine("Admin user password hash updated");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Admin user exists and password hash is up-to-date");
+                    }
+                }
+
+                var waiterUser = context.Users.FirstOrDefault(u => u.Username == "waiter");
+                if (waiterUser == null)
+                {
+                    waiterUser = new RestaurantSystem.Core.Models.User
+                    {
+                        Username = "waiter",
+                        PasswordHash = waiterHash,
+                        FirstName = "John",
+                        LastName = "Doe",
+                        Email = "waiter@restaurant.com",
+                        Phone = "9876543210",
+                        Role = RestaurantSystem.Core.Enums.UserRole.Waiter,
+                        IsActive = true,
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow
+                    };
+                    context.Users.Add(waiterUser);
+                    Console.WriteLine("Waiter user created");
+                }
+                else
+                {
+                    if (string.IsNullOrWhiteSpace(waiterUser.PasswordHash) || waiterUser.PasswordHash != waiterHash)
+                    {
+                        waiterUser.PasswordHash = waiterHash;
+                        waiterUser.UpdatedAt = DateTime.UtcNow;
+                        Console.WriteLine("Waiter user password hash updated");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Waiter user exists and password hash is up-to-date");
+                    }
+                }
 
                 await context.SaveChangesAsync(default);
-                Console.WriteLine("Default users created successfully");
+                Console.WriteLine("Default users ensured successfully");
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine("Users already exist in database");
+                Console.WriteLine($"Error ensuring default users: {ex.Message}");
             }
         }
         catch (Exception ex)

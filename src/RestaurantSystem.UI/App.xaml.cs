@@ -21,18 +21,18 @@ public partial class App : Application
     public IServiceProvider ServiceProvider => _host.Services;
 
     public App()
-  {
+    {
         _host = Host.CreateDefaultBuilder()
       .ConfigureAppConfiguration((context, config) =>
      {
- config.SetBasePath(Directory.GetCurrentDirectory())
-                  .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-   .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: true);
-            })
+         config.SetBasePath(Directory.GetCurrentDirectory())
+                          .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+           .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: true);
+     })
      .ConfigureServices((context, services) =>
       {
           ConfigureServices(services, context.Configuration);
-            })
+      })
             .Build();
     }
 
@@ -44,12 +44,14 @@ public partial class App : Application
         // Register UI Services
         services.AddSingleton<Services.IDialogService, Services.DialogService>();
         services.AddSingleton<Services.INavigationService, Services.NavigationService>();
-        services.AddSingleton<RestaurantSystem.Core.Interfaces.Services.IAuthenticationService, Services.AuthenticationService>();
-        
+        // AuthenticationService depends on IUserRepository and AppDbContext (scoped services).
+        // Register AuthenticationService as scoped so it receives scoped repository/DbContext correctly.
+        services.AddScoped<RestaurantSystem.Core.Interfaces.Services.IAuthenticationService, Services.AuthenticationService>();
+
         // Register Windows
         services.AddSingleton<MainWindow>();
         services.AddTransient<Views.LoginWindow>();
-        
+
         // Register ViewModels
         services.AddSingleton<MainWindowViewModel>();
         services.AddTransient<TablesViewModel>();
@@ -63,7 +65,7 @@ public partial class App : Application
         services.AddTransient<ViewModels.Orders.OrderItemViewModel>();
         services.AddTransient<AnalyticsViewModel>();
     }
-    
+
     private MainWindowViewModel CreateMainWindowViewModel(IServiceProvider services)
     {
         return new MainWindowViewModel(
@@ -88,24 +90,24 @@ public partial class App : Application
             // Show login window first
             var authService = _host.Services.GetRequiredService<RestaurantSystem.Core.Interfaces.Services.IAuthenticationService>();
             var loginWindow = new Views.LoginWindow(authService);
-            
+
             var result = loginWindow.ShowDialog();
-            
+
             if (result == true && loginWindow.LoggedInUser != null)
             {
                 // User logged in successfully, show main window
                 var mainWindow = _host.Services.GetRequiredService<MainWindow>();
                 var mainWindowViewModel = CreateMainWindowViewModel(_host.Services);
-                
+
                 // Set DataContext
                 mainWindow.DataContext = mainWindowViewModel;
-                
+
                 // Navigate to Tables view by default
                 mainWindowViewModel.NavigateTablesCommand.Execute(null);
-                
+
                 // Set as main window BEFORE showing
                 MainWindow = mainWindow;
-                
+
                 // Show the main window
                 mainWindow.Show();
             }
@@ -117,7 +119,7 @@ public partial class App : Application
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Error starting application: {ex.Message}\n\n{ex.StackTrace}", 
+            MessageBox.Show($"Error starting application: {ex.Message}\n\n{ex.StackTrace}",
                 "Startup Error", MessageBoxButton.OK, MessageBoxImage.Error);
             Shutdown();
         }
@@ -126,8 +128,8 @@ public partial class App : Application
     protected override async void OnExit(ExitEventArgs e)
     {
         using (_host)
-   {
-  await _host.StopAsync(TimeSpan.FromSeconds(5));
+        {
+            await _host.StopAsync(TimeSpan.FromSeconds(5));
         }
 
         base.OnExit(e);
